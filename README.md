@@ -1,2 +1,2 @@
-# KISS
-Keep Your Stuff Simple - Evolution of deshack/KISS
+# KYSS
+Keep Your Stuff Simple - Evolution of deshack/KYSS
