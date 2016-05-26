@@ -4,9 +4,65 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "25508d01e8f1fcffb67116d2b7f20149",
-    "content-hash": "9cde6fc04e2471a218ca4a604773d874",
+    "hash": "71cd5355ed276ef441c7734b4a35650e",
+    "content-hash": "3fe0727f91ca1a0d7401d38cb5171dc0",
     "packages": [
+        {
+            "name": "caffeinated/shinobi",
+            "version": "v2.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/caffeinated/shinobi.git",
+                "reference": "5be036d1c427db4d626d4e461a1ee3969c7016eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/caffeinated/shinobi/zipball/5be036d1c427db4d626d4e461a1ee3969c7016eb",
+                "reference": "5be036d1c427db4d626d4e461a1ee3969c7016eb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "5.1.*|5.2.*",
+                "illuminate/database": "5.1.*|5.2.*",
+                "illuminate/filesystem": "5.1.*|5.2.*",
+                "illuminate/support": "5.1.*|5.2.*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Caffeinated\\Shinobi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shea Lewis",
+                    "email": "shea.lewis89@gmail.com"
+                }
+            ],
+            "description": "Laravel 5 Roles and Permissions",
+            "keywords": [
+                "auth",
+                "caffeinated",
+                "laravel",
+                "permissions",
+                "roles",
+                "shinobi"
+            ],
+            "time": "2016-01-27 23:40:57"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
@@ -434,6 +490,60 @@
                 "laravel"
             ],
             "time": "2016-05-17 13:24:40"
+        },
+        {
+            "name": "laravelcollective/html",
+            "version": "v5.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelCollective/html.git",
+                "reference": "3a312d39ffe37da0f57b602618b61fd07c1fcec5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/3a312d39ffe37da0f57b602618b61fd07c1fcec5",
+                "reference": "3a312d39ffe37da0f57b602618b61fd07c1fcec5",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "5.2.*",
+                "illuminate/routing": "5.2.*",
+                "illuminate/session": "5.2.*",
+                "illuminate/support": "5.2.*",
+                "illuminate/view": "5.2.*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "illuminate/database": "5.2.*",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Collective\\Html\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                },
+                {
+                    "name": "Adam Engebretson",
+                    "email": "adam@laravelcollective.com"
+                }
+            ],
+            "description": "HTML and Form Builders for the Laravel Framework",
+            "homepage": "http://laravelcollective.com",
+            "time": "2016-01-27 22:29:54"
         },
         {
             "name": "league/flysystem",
@@ -895,6 +1005,56 @@
                 "shell"
             ],
             "time": "2016-03-09 05:03:14"
+        },
+        {
+            "name": "smarch/watchtower",
+            "version": "v1.1.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SmarchSoftware/watchtower.git",
+                "reference": "576b15e5be57d5dc25d91ae7715f17d207b75f2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SmarchSoftware/watchtower/zipball/576b15e5be57d5dc25d91ae7715f17d207b75f2f",
+                "reference": "576b15e5be57d5dc25d91ae7715f17d207b75f2f",
+                "shasum": ""
+            },
+            "require": {
+                "caffeinated/shinobi": "~2.0",
+                "laravel/framework": "~5.1",
+                "laravelcollective/html": "~5.1",
+                "php": ">=5.5.9"
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "Smarch\\Watchtower\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Smarch Software",
+                    "email": "packages@smarchsoft.com"
+                }
+            ],
+            "description": "Front-end for the Shinboi Auth system of Users / Roles / Permissions in Laravel 5",
+            "homepage": "https://github.com/SmarchSoftware/watchtower",
+            "keywords": [
+                "admin",
+                "authorization",
+                "gui",
+                "laravel",
+                "permissions",
+                "rbac",
+                "roles",
+                "shinobi"
+            ],
+            "time": "2016-03-23 21:20:54"
         },
         {
             "name": "swiftmailer/swiftmailer",
