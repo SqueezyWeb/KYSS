@@ -13,8 +13,8 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>The Watchtower</title>
-	
+	<title>KYSS Admin</title>
+
 	<!-- styles -->
 	  <!-- Bootstrap core CSS -->
 	  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -97,14 +97,14 @@
 				          <i class="glyphicon glyphicon-user"></i> {{ Auth::user()->name }} <span class="caret"></span></a>
 				          <ul class="dropdown-menu">
 				            <li><a href="{{ route( config('watchtower.route.as') . 'index') }}"><i class="fa fa-fw fa-tasks"></i> Dashboard</a></li>
-    						
+
     						<li role="separator" class="divider"></li>
     						<li class="text-muted text-center"><i class="fa fa-users"></i> Your Roles</li>
 							@forelse(Auth::user()->roles as $role)
 								<li><a href="{{ route( config('watchtower.route.as') . 'role.permission.edit', $role->id) }}"><i class="fa fa-users fa-xs"></i> {{ $role->name }}</a></li>
 							@empty
 								<li><a href="#"><i class="fa fa-hand-stop-o fa-xs"></i> No roles</a></li>
-							@endforelse    						
+							@endforelse
     						<li role="separator" class="divider"></li>
 				            <li><a href="{{ url( config('watchtower.auth_routes.logout') ) }}"><i class="fa fa-fw fa-sign-out"></i> Logout</a></li>
 				          </ul>
@@ -118,7 +118,7 @@
 
 	<div class="container">
 		@include(config('watchtower.views.layouts.flash'))
-	
+
 		@yield('content')
 	</div>
 
@@ -138,10 +138,10 @@
 
 	<!-- Pace Loader -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
-    
+
     <!-- For Delete Modal prompts -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-    
+
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script>
 		/*!
@@ -184,7 +184,7 @@
 
 		/*!
 		 * For Delete Modal prompts
-		 * 
+		 *
 		 */
 	    $('button[type="submit"]').click(function(e) {
 		    if ( $(this).hasClass('btn-danger') ) {
