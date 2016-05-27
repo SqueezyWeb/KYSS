@@ -32,15 +32,14 @@ return [
     | and use that one if one is found, othewise it uses the default.
     |
     */
-   'default_theme' => 'spacelab',
-
+   'default_theme' => 'flatly',
 
     /*
     |--------------------------------------------------------------------------
     | Authentication Routes
     |--------------------------------------------------------------------------
     |
-    | Laravel 5.2 changed the routes that they always used for authentication. 
+    | Laravel 5.2 changed the routes that they always used for authentication.
     | Watchtower will try to detect (below) which route to choose, however,
     | you can specify the authentication routes your app will use.
     |
@@ -64,13 +63,13 @@ return [
     |--------------------------------------------------------------------------
     |
     | Watchtower comes ready to go with pre-defined permissions to access all
-    | the different areas. Feel free to change them to match your needs, if 
+    | the different areas. Feel free to change them to match your needs, if
     | you wish. Can be a permission slug from shinobi's tables, or even a
     | boolean true/false to globally enable/disable permission. However,
     | the permissions in watchtower will return "false" for security
     | if nothing else is supplied in a config file.
     |
-    */   
+    */
    'acl' => [
         'user' => [
             'index'         => 'show.user.index',
@@ -121,7 +120,7 @@ return [
     | Watchtower comes pre-equipped with views that will work out of the box.
     | However, you are free to define you own views here instead.
     |
-    */   
+    */
    'views' => [
         'layouts' => [
             'master'        => 'watchtower::layouts.master',
@@ -134,7 +133,7 @@ return [
         ],
 
         'users' => [
-            'index'     => 'watchtower::user.index',            
+            'index'     => 'watchtower::user.index',
             'create'    => 'watchtower::user.create',
             'show'      => 'watchtower::user.edit',
             'edit'      => 'watchtower::user.edit',
@@ -143,7 +142,7 @@ return [
         ],
 
         'roles' => [
-            'index'     => 'watchtower::role.index',            
+            'index'     => 'watchtower::role.index',
             'create'    => 'watchtower::partials.create',
             'show'      => 'watchtower::partials.edit',
             'edit'      => 'watchtower::partials.edit',
@@ -153,7 +152,7 @@ return [
         ],
 
         'permissions' => [
-            'index'     => 'watchtower::permission.index',            
+            'index'     => 'watchtower::permission.index',
             'create'    => 'watchtower::partials.create',
             'show'      => 'watchtower::partials.edit',
             'edit'      => 'watchtower::partials.edit',
@@ -173,10 +172,10 @@ return [
     | if you wish. Make sure your route is a named route for proper
     | linkage.
     |
-    */ 
+    */
    'dashboard' => [
         'users' => [
-            'name'  => "Users",            
+            'name'  => "Users",
             'route' => 'watchtower.user.index',
             'icon'  => 'fa fa-user fa-5x',
             'colour'=> 'primary'
@@ -223,7 +222,7 @@ return [
     |
     | If you want to prefix all your watchtower routes, enter the prefix here.
     | https://laravel.com/docs/5.2/routing#route-group-prefixes for info.
-    | 
+    |
     | i.e 'route_prefix' => 'admin' will change your urls to look
     | like 'http://<yoursite>/admin/watchtower/user' instead of
     | 'http://<yoursite>/watchtower/user'. Default is none.
