@@ -36,8 +36,9 @@ class DashboardController extends Controller {
    * @return \Illuminate\Http\Response
    */
   public function index() {
+    view()->share('layout', 'layouts.dashboard.two-columns');
     Widget::group('dashboard')->addWidget('dashboard.Welcome');
-    Widget::group('dashboard')->addWidget('dashboard.Welcome', ['title' => 'Lorem ipsum']);
+    Widget::group('dashboard')->addWidget('dashboard.Welcome', ['title' => 'Lorem ipsum', 'content' => 'Dolor sit amet']);
     return view('dashboard');
   }
 }

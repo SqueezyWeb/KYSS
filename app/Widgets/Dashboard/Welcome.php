@@ -40,7 +40,7 @@ class Welcome extends AbstractWidget {
    */
   public function run() {
     return view("widgets.welcome", [
-      'widget' => $this->config,
+      'widget' => $this->config
     ]);
   }
 }
