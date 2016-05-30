@@ -161,6 +161,8 @@ return [
     Smarch\Watchtower\WatchtowerServiceProvider::class, // Watchtower
 
     Arrilot\Widgets\ServiceProvider::class, // Laravel Widgets
+
+    Freyja\Hook\HookServiceProvider::class, // Hook
   ],
 
   /*
@@ -216,6 +218,6 @@ return [
     // 'Watchtower'=> Smarch\Watchtower\WatchtowerFacade::class, // not required, but available
     'Widget' => Arrilot\Widgets\Facade::class, // Laravel Widgets
     'AsyncWidget' => Arrilot\Widgets\AsyncFacade::class, // Async Laravel Widgets
+    'Hook' => Freyja\Hook\Facades\Hook::class, // Hook
   ],
-
 ];

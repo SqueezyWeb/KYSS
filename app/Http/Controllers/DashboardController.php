@@ -9,6 +9,7 @@
 
 namespace App\Http\Controllers;
 
+use Hook;
 use Widget;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -31,6 +32,9 @@ class DashboardController extends Controller {
    */
   public function __construct() {
     $this->middleware('auth');
+    Hook::add('widgets.dashboard', function($group) {
+      $group->addWidget('dashboard.Welcome', ['title' => 'test']);
+    });
   }
 
   /**
@@ -48,6 +52,21 @@ class DashboardController extends Controller {
 
     Widget::group('dashboard')->addWidget('dashboard.Welcome', array_add([], 'permissions.view', 'view.widget.welcome'));
     Widget::group('dashboard')->addWidget('dashboard.Welcome', ['title' => 'Lorem ipsum', 'content' => 'Dolor sit amet']);
+
+    /**
+     * Add additional widgets.
+     *
+     * Usage:
+     * Hook::add('widgets.dashboard', $group) {
+     *  $group->addWidget('foo');
+     * }
+     *
+     * @since 0.1.0
+     *
+     * @param WidgetGroup
+     */
+    //  TODO: Uncomment the following after including Hook depencency.
+    Hook::run('widgets.dashboard', Widget::group('dashboard'));
 
     return view('dashboard');
   }

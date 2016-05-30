@@ -9,7 +9,8 @@
     "laravel/framework": "5.2.*",
     "caffeinated/shinobi": "^2.3",
     "smarch/watchtower": "v1.1.5.3",
-    "arrilot/laravel-widgets": "^3.4"
+    "arrilot/laravel-widgets": "^3.4",
+    "squeezyweb/laravel-freyja-hook": "^1.0@dev"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
