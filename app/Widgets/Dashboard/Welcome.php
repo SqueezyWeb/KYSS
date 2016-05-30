@@ -9,7 +9,7 @@
 
 namespace App\Widgets\Dashboard;
 
-use Arrilot\Widgets\AbstractWidget;
+use KYSS\Widgets\AbstractWidget;
 
 /**
  * Dashboard Welcome Widget.
@@ -27,7 +27,7 @@ class Welcome extends AbstractWidget {
    * @var array
    */
   protected $config = [
-    'title' => 'Welcome!'
+    'title' => 'Welcome!',
   ];
 
   /**

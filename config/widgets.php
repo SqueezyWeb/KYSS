@@ -1,6 +1,6 @@
 <?php
 /**
- * Dashboard configuration.
+ * KYSS Widgets Configuration.
  *
  * @package KYSS\Config
  * @copyright 2016 SqueezyWeb
@@ -9,9 +9,11 @@
 
 return [
   /**
-   * Dashboard layout.
+   * Default widgets permissions.
    *
    * @since 0.1.0
    */
-  'layout' => 'two-columns',
+  'permissions' => [
+    'view' => 'show.widget',
+  ],
 ];

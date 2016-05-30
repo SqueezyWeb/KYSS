@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use Widget;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 /**
  * Dashboard Controller.
@@ -46,9 +47,9 @@ class DashboardController extends Controller {
     $layout = 'layouts.dashboard.'.trim($layout);
     view()->share('layout', $layout);
 
-    Widget::group('dashboard')->addWidget('dashboard.Welcome');
+    Widget::group('dashboard')->addWidget('dashboard.Welcome', Arr::add([], 'permissions.view', 'view.widget.welcome'));
     Widget::group('dashboard')->addWidget('dashboard.Welcome', ['title' => 'Lorem ipsum', 'content' => 'Dolor sit amet']);
-    
+
     return view('dashboard');
   }
 }
