@@ -24,6 +24,9 @@ class DashboardController extends Controller {
   /**
    * Create a new controller instance.
    *
+   * @since 0.1.0
+   * @access public
+   *
    * @return void
    */
   public function __construct() {
@@ -33,12 +36,19 @@ class DashboardController extends Controller {
   /**
    * Show the application dashboard.
    *
+   * @since 0.1.0
+   * @access public
+   *
    * @return \Illuminate\Http\Response
    */
   public function index() {
-    view()->share('layout', 'layouts.dashboard.two-columns');
+    $layout = config('dashboard.layout', 'two-columns'); // Config option, default.
+    $layout = 'layouts.dashboard.'.trim($layout);
+    view()->share('layout', $layout);
+
     Widget::group('dashboard')->addWidget('dashboard.Welcome');
     Widget::group('dashboard')->addWidget('dashboard.Welcome', ['title' => 'Lorem ipsum', 'content' => 'Dolor sit amet']);
+    
     return view('dashboard');
   }
 }

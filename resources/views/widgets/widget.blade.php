@@ -10,4 +10,5 @@
       @yield('widget-content')
     </div>
   </div>
+{{-- See https://github.com/laravel/framework/issues/1058#issuecomment-17194530 --}}
 @overwrite
