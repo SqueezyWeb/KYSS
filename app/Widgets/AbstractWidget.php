@@ -10,7 +10,6 @@
 namespace KYSS\Widgets;
 
 use Arrilot\Widgets\AbstractWidget as ArrilotAbstractWidget;
-use Illuminate\Support\Arr;
 
 /**
  * Abstract Widget.
@@ -30,8 +29,9 @@ abstract class AbstractWidget extends ArrilotAbstractWidget {
    * empty.
    */
   public function __construct(array $config = []) {
-    if (!Arr::has($this->config, 'permissions.view'))
-      Arr::set($this->config, 'permissions.view', config('widgets.permissions.view'));
+    // Avoid multiple sets if there's user-defined configs.
+    if (!array_has($config, 'permissions.view'))
+      $this->config = array_add($this->config, 'permissions.view', config('widgets.permissions.view'));
 
     parent::__construct($config);
   }
