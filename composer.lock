@@ -4,9 +4,59 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "71cd5355ed276ef441c7734b4a35650e",
-    "content-hash": "3fe0727f91ca1a0d7401d38cb5171dc0",
+    "hash": "164f9aba3ce2a69b7c6850ea003b8293",
+    "content-hash": "41c83a7619677f3860eb246e5c84056c",
     "packages": [
+        {
+            "name": "arrilot/laravel-widgets",
+            "version": "3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arrilot/laravel-widgets.git",
+                "reference": "440e5cdca6b7a70e89b114737ff7605369dd9897"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arrilot/laravel-widgets/zipball/440e5cdca6b7a70e89b114737ff7605369dd9897",
+                "reference": "440e5cdca6b7a70e89b114737ff7605369dd9897",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "5.*",
+                "illuminate/container": "5.*",
+                "illuminate/contracts": "5.*",
+                "illuminate/support": "5.*",
+                "illuminate/view": "5.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Arrilot\\Widgets\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nekrasov Ilya",
+                    "email": "nekrasov.ilya90@gmail.com"
+                }
+            ],
+            "description": "A powerful alternative to view composers. Asynchronous widgets, reloadable widgets, console generator, caching - everything you can think of.",
+            "homepage": "https://github.com/Arrilot/laravel-widgets",
+            "keywords": [
+                "ajax",
+                "laravel",
+                "widgets"
+            ],
+            "time": "2016-05-21 19:10:34"
+        },
         {
             "name": "caffeinated/shinobi",
             "version": "v2.3.1",
@@ -218,6 +268,66 @@
             "time": "2015-11-06 14:35:42"
         },
         {
+            "name": "freyja/hook",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SqueezyWeb/Hook.git",
+                "reference": "b51e220e13f92b6fd40eebd505f697db15179ef4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SqueezyWeb/Hook/zipball/b51e220e13f92b6fd40eebd505f697db15179ef4",
+                "reference": "b51e220e13f92b6fd40eebd505f697db15179ef4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "dompdf/dompdf": "~0.6.0",
+                "phpdocumentor/phpdocumentor": "~2.7.0",
+                "phpunit/phpunit": "~4.8.0",
+                "symfony/filesystem": "~2.8.0",
+                "symfony/translation": "~2.8.0",
+                "symfony/yaml": "~2.8.0",
+                "zendframework/zend-cache": "~2.2.10"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Freyja\\Hook\\": "Lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPLv2+"
+            ],
+            "authors": [
+                {
+                    "name": "Mattia Migliorini",
+                    "email": "mattia@squeezyweb.com",
+                    "homepage": "http://deshack.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A utility to hook callbacks in your code, inspired at WordPress' filters and actions.",
+            "keywords": [
+                "HOOK",
+                "action",
+                "callbacks",
+                "filter",
+                "freyja",
+                "php"
+            ],
+            "time": "2016-03-02 16:33:54"
+        },
+        {
             "name": "jakub-onderka/php-console-color",
             "version": "0.1",
             "source": {
@@ -364,16 +474,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.2.32",
+            "version": "v5.2.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f688217113f70b01d0e127da9035195415812bef"
+                "reference": "6a26f3bb6a6e00c53654a661221643ad1b98e146"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f688217113f70b01d0e127da9035195415812bef",
-                "reference": "f688217113f70b01d0e127da9035195415812bef",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/6a26f3bb6a6e00c53654a661221643ad1b98e146",
+                "reference": "6a26f3bb6a6e00c53654a661221643ad1b98e146",
                 "shasum": ""
             },
             "require": {
@@ -489,7 +599,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-05-17 13:24:40"
+            "time": "2016-05-26 21:59:46"
         },
         {
             "name": "laravelcollective/html",
@@ -1057,6 +1167,51 @@
             "time": "2016-03-23 21:20:54"
         },
         {
+            "name": "squeezyweb/laravel-freyja-hook",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SqueezyWeb/Laravel-Freyja-Hook.git",
+                "reference": "0c2900968e15107321c04f4fd2a6543ae61acf11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SqueezyWeb/Laravel-Freyja-Hook/zipball/0c2900968e15107321c04f4fd2a6543ae61acf11",
+                "reference": "0c2900968e15107321c04f4fd2a6543ae61acf11",
+                "shasum": ""
+            },
+            "require": {
+                "freyja/hook": "^1.0",
+                "illuminate/support": "^5.2"
+            },
+            "provide": {
+                "freyja/hook": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Freyja\\Hook\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mattia Migliorini",
+                    "email": "mattia@squeezyweb.com"
+                }
+            ],
+            "description": "A wrapper around Freyja Hook for Laravel. Create arbitrary hooks to execute actions or filter data.",
+            "time": "2016-05-30 16:47:16"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.2",
             "source": {
@@ -1228,16 +1383,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "807dde98589f9b2b00624dca326740380d78dbbc"
+                "reference": "0343b2cedd0edb26cdc791212a8eb645c406018b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/807dde98589f9b2b00624dca326740380d78dbbc",
-                "reference": "807dde98589f9b2b00624dca326740380d78dbbc",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/0343b2cedd0edb26cdc791212a8eb645c406018b",
+                "reference": "0343b2cedd0edb26cdc791212a8eb645c406018b",
                 "shasum": ""
             },
             "require": {
@@ -1257,7 +1412,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -1284,7 +1439,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-05-05 06:56:13"
+            "time": "2016-04-12 18:27:47"
         },
         {
             "name": "symfony/finder",
@@ -3162,16 +3317,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.0.6",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "0047c8366744a16de7516622c5b7355336afae96"
+                "reference": "eca51b7b65eb9be6af88ad7cc91685f1556f5c9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/0047c8366744a16de7516622c5b7355336afae96",
-                "reference": "0047c8366744a16de7516622c5b7355336afae96",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/eca51b7b65eb9be6af88ad7cc91685f1556f5c9a",
+                "reference": "eca51b7b65eb9be6af88ad7cc91685f1556f5c9a",
                 "shasum": ""
             },
             "require": {
@@ -3180,7 +3335,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -3207,12 +3362,14 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-04 07:55:57"
+            "time": "2016-05-26 21:46:24"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "squeezyweb/laravel-freyja-hook": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
