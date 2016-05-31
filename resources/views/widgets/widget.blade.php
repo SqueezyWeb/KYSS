@@ -9,6 +9,10 @@
     <div class="panel-body">
       @yield('widget-content')
     </div>
+
+    @if (isset($widget['footer']) && !empty($widget['footer']))
+      <div class="panel-footer">{{ $widget['footer'] }}</div>
+    @endif
   </div>
 {{-- See https://github.com/laravel/framework/issues/1058#issuecomment-17194530 --}}
 @overwrite
