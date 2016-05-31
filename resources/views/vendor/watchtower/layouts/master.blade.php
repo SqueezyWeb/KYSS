@@ -1,7 +1,7 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if lt IE 7]>	  <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>		 <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>		 <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 
 <head>
@@ -33,10 +33,10 @@
 
 	  <!-- custom page style -->
 	  <style>
-	    /* Move down content because we have a fixed navbar that is 50px tall */
-	    body {
-	      padding-top: 60px;
-	    }
+		/* Move down content because we have a fixed navbar that is 50px tall */
+		body {
+		  padding-top: 60px;
+		}
 	  </style>
 	<!-- /styles -->
 
@@ -49,20 +49,20 @@
 
 <body>
 	<!--[if lt IE 8]>
-	    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
 
 	<nav class="navbar navbar-default navbar-fixed-top">
-	    <div class="container">
-	        <div class="navbar-header">
-	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">
-	                <span class="sr-only">Toggle navigation</span>
-	                <span class="icon-bar"></span>
-	                <span class="icon-bar"></span>
-	                <span class="icon-bar"></span>
-	            </button>
-	            <a class="navbar-brand" href="{{ route( config('watchtower.route.as').'index') }}">{{ $title }}</a>
-	        </div>
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="{{ route( config('watchtower.route.as').'index') }}">{{ $title }}</a>
+			</div>
 
 			<div id="navbar-collapse" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -71,49 +71,50 @@
 						<li><a href="{{ url( config('watchtower.auth_routes.register') ) }}">Register</a></li>
 					@else
 						<!-- navigation links -->
+						<li><a href="{{ route('dashboard') }}" title="Dashboard"><i class="fa fa-tasks fa-lg"></i><span class="sr-only"> Dashboard</span></a></li>
 						@foreach( config('watchtower-menu.navigation') as $nav_menu )
-				        <li class="dropdown">
-				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="{{ $nav_menu['group'] }}">
-				          <i class="{{$nav_menu['class']}}"></i><span class="sr-only"> {{$nav_menu['group']}}</span> <span class="caret"></span></a>
-				          <ul class="dropdown-menu">
-				          	@forelse($nav_menu['links'] as $navlink)
-				          		@if ($navlink == 'separator')
-				             		<li role="separator" class="divider"></li>
-				             	@elseif ($navlink['route'] === 'header')
-    								<li class="text-muted text-center"><i class="{{ $navlink['class'] }}"></i> {{ $navlink['title'] }}</li>
-				             	@else
-				             		<li><a href="{{ route($navlink['route']) }}"><i class="{{ $navlink['class'] }}"></i>  {{ $navlink['title'] }}</a></li>
-				             	@endif
-				            @empty
-				             <li><a href="#">No links defined yet</a></li>
-				            @endforelse
-				          </ul>
-				        </li>
+						<li class="dropdown">
+						  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="{{ $nav_menu['group'] }}">
+						  <i class="{{$nav_menu['class']}}"></i><span class="sr-only"> {{$nav_menu['group']}}</span> <span class="caret"></span></a>
+						  <ul class="dropdown-menu">
+						  	@forelse($nav_menu['links'] as $navlink)
+						  		@if ($navlink == 'separator')
+							 		<li role="separator" class="divider"></li>
+							 	@elseif ($navlink['route'] === 'header')
+									<li class="text-muted text-center"><i class="{{ $navlink['class'] }}"></i> {{ $navlink['title'] }}</li>
+							 	@else
+							 		<li><a href="{{ route($navlink['route']) }}"><i class="{{ $navlink['class'] }}"></i>  {{ $navlink['title'] }}</a></li>
+							 	@endif
+							@empty
+							 <li><a href="#">No links defined yet</a></li>
+							@endforelse
+						  </ul>
+						</li>
 						@endforeach
 
-				        <!-- user dropdown links -->
-				        <li class="dropdown">
-				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="User Information">
-				          <i class="glyphicon glyphicon-user"></i> {{ Auth::user()->name }} <span class="caret"></span></a>
-				          <ul class="dropdown-menu">
-				            <li><a href="{{ route( config('watchtower.route.as') . 'index') }}"><i class="fa fa-fw fa-tasks"></i> Dashboard</a></li>
+						<!-- user dropdown links -->
+						<li class="dropdown">
+						  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="User Information">
+						  <i class="glyphicon glyphicon-user"></i> {{ Auth::user()->name }} <span class="caret"></span></a>
+						  <ul class="dropdown-menu">
+							<li><a href="{{ route('dashboard') }}"><i class="fa fa-fw fa-tasks"></i> Dashboard</a></li>
 
-    						<li role="separator" class="divider"></li>
-    						<li class="text-muted text-center"><i class="fa fa-users"></i> Your Roles</li>
+							<li role="separator" class="divider"></li>
+							<li class="text-muted text-center"><i class="fa fa-users"></i> Your Roles</li>
 							@forelse(Auth::user()->roles as $role)
 								<li><a href="{{ route( config('watchtower.route.as') . 'role.permission.edit', $role->id) }}"><i class="fa fa-users fa-xs"></i> {{ $role->name }}</a></li>
 							@empty
 								<li><a href="#"><i class="fa fa-hand-stop-o fa-xs"></i> No roles</a></li>
 							@endforelse
-    						<li role="separator" class="divider"></li>
-				            <li><a href="{{ url( config('watchtower.auth_routes.logout') ) }}"><i class="fa fa-fw fa-sign-out"></i> Logout</a></li>
-				          </ul>
-				        </li>
+							<li role="separator" class="divider"></li>
+							<li><a href="{{ url( config('watchtower.auth_routes.logout') ) }}"><i class="fa fa-fw fa-sign-out"></i> Logout</a></li>
+						  </ul>
+						</li>
 					@endif
 				</ul>
 			</div>
 
-	    </div><!-- /.container-fluid -->
+		</div><!-- /.container-fluid -->
 	</nav>
 
 	<div class="container">
@@ -125,25 +126,25 @@
 	<hr/>
 
 	<div class="container">
-	    <p class="text-muted">{{ date('Y') }} Smarch Software</p>
-	    <br/>
+		<p class="text-muted">{{ date('Y') }} SqueezyWeb</p>
+		<br/>
 	</div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 	<!-- Pace Loader -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
 
-    <!-- For Delete Modal prompts -->
+	<!-- For Delete Modal prompts -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script>
 		/*!
 		* IE10 viewport hack for Surface/desktop Windows 8 bug
 		* Copyright 2014-2015 Twitter, Inc.
@@ -186,40 +187,40 @@
 		 * For Delete Modal prompts
 		 *
 		 */
-	    $('button[type="submit"]').click(function(e) {
-		    if ( $(this).hasClass('btn-danger') ) {
-		        var currentForm = this.closest("form");
-		        e.preventDefault();
-		        swal({
-		           title: "Are you sure?",
-		           text: "You will not be able to recover this object.",
-		           type: "warning",
-		           showCancelButton: true,
-		           confirmButtonColor: "#DD6B55",
-		           confirmButtonText: "Yes, delete it!",
-		           cancelButtonText: "No, keep it.",
-		           closeOnConfirm: true,
-		           closeOnCancel: false
-		            },
-		            function(isConfirm){
-	            		if (isConfirm) {
-	            			currentForm.submit();
-	            		} else {
-	            		     swal({
-	            		     	title: "Cancelled!",
-	            		     	text: 'Object not deleted. <br /> <em><small>(I will close in 2 seconds)</em></small>',
-	            		     	timer: 2000,
-	            		     	showConfirmButton: true,
-		           				confirmButtonText: "Close now.",
-	            		     	type: 'error',
-		           				html: true
-	            		     });
-	            	    }
-	            	}
-		        );
-		    }
-	    });
-    </script>
+		$('button[type="submit"]').click(function(e) {
+			if ( $(this).hasClass('btn-danger') ) {
+				var currentForm = this.closest("form");
+				e.preventDefault();
+				swal({
+				   title: "Are you sure?",
+				   text: "You will not be able to recover this object.",
+				   type: "warning",
+				   showCancelButton: true,
+				   confirmButtonColor: "#DD6B55",
+				   confirmButtonText: "Yes, delete it!",
+				   cancelButtonText: "No, keep it.",
+				   closeOnConfirm: true,
+				   closeOnCancel: false
+					},
+					function(isConfirm){
+						if (isConfirm) {
+							currentForm.submit();
+						} else {
+							 swal({
+							 	title: "Cancelled!",
+							 	text: 'Object not deleted. <br /> <em><small>(I will close in 2 seconds)</em></small>',
+							 	timer: 2000,
+							 	showConfirmButton: true,
+				   				confirmButtonText: "Close now.",
+							 	type: 'error',
+				   				html: true
+							 });
+						}
+					}
+				);
+			}
+		});
+	</script>
 
 	@yield('footer_assets')
 

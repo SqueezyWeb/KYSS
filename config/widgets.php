@@ -16,4 +16,11 @@ return [
   'permissions' => [
     'view' => 'show.widget',
   ],
+
+  /**
+   * Default widgets style.
+   *
+   * @since 0.1.0
+   */
+  'style' => 'default'
 ];

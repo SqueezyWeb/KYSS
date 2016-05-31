@@ -1,7 +1,7 @@
 @extends(isset($layout) && !empty($layout) ? $layout : 'layouts.dashboard.two-columns')
 
 @section('widget')
-  <div class="panel panel-default">
+  <div class="panel panel-{{ $widget['style'] }}">
     @if (isset($widget['title']) && !empty($widget['title']))
       <div class="panel-heading">{{ $widget['title'] }}</div>
     @endif

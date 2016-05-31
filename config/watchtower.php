@@ -18,7 +18,7 @@ return [
     | The name of your site (or whatever) you want displayed on the header.
     |
     */
-	'site_title' => 'Watchtower',
+	'site_title' => 'KYSS Admin',
 
 
     /*

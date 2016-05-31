@@ -32,6 +32,8 @@ abstract class AbstractWidget extends ArrilotAbstractWidget {
     // Avoid multiple sets if there's user-defined configs.
     if (!array_has($config, 'permissions.view'))
       $this->config = array_add($this->config, 'permissions.view', config('widgets.permissions.view'));
+    if (!array_has($config, 'style'))
+      $this->config = array_add($this->config, 'style', config('widgets.style'));
 
     parent::__construct($config);
   }
