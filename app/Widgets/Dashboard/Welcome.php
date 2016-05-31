@@ -9,7 +9,7 @@
 
 namespace App\Widgets\Dashboard;
 
-use KYSS\Widgets\AbstractWidget;
+use Arrilot\Widgets\AbstractWidget;
 
 /**
  * Dashboard Welcome Widget.
