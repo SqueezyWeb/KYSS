@@ -1,4 +1,4 @@
-@extends(isset($layout) && !empty($layout) ? $layout : 'layouts.dashboard.two-columns')
+@extends((isset($layout) && !empty($layout)) ? $layout : 'layouts.dashboard.two-columns')
 
 @section('widget')
   <div class="panel panel-{{ array_get($widget, 'style', config('widgets.style')) }}">

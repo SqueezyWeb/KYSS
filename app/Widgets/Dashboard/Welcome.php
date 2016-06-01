@@ -28,7 +28,6 @@ class Welcome extends AbstractWidget {
    */
   protected $config = [
     'title' => 'Welcome!',
-    'style' => 'primary'
   ];
 
   /**

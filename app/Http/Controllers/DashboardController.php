@@ -32,16 +32,6 @@ class DashboardController extends Controller {
    */
   public function __construct() {
     $this->middleware('auth');
-
-    // TODO: remove the following hook.
-    Hook::add('widgets.dashboard', function($group) {
-      $group->addWidget('dashboard.Welcome', ['title' => 'test', 'style' => 'success']);
-      $group->addWidget('dashboard.Welcome', ['title' => 'test', 'style' => 'success']);
-      $group->addWidget('dashboard.Welcome', ['title' => 'test', 'style' => 'success']);
-      $group->addWidget('dashboard.Welcome', ['title' => 'test', 'style' => 'success']);
-      $group->addWidget('dashboard.Welcome', ['title' => 'test', 'style' => 'success']);
-      $group->addWidget('dashboard.Welcome', ['title' => 'test', 'style' => 'success']);
-    });
   }
 
   /**
@@ -57,8 +47,7 @@ class DashboardController extends Controller {
     $layout = 'layouts.dashboard.'.trim($layout);
     view()->share('layout', $layout);
 
-    Widget::group('dashboard')->addWidget('dashboard.Welcome', array_add([], 'permissions.view', 'view.widget.welcome'));
-    Widget::group('dashboard')->addWidget('dashboard.Welcome', ['title' => '', 'content' => 'Lorem ipsum dolor sit amet']);
+    Widget::group('dashboard')->addWidget('dashboard.Welcome');
 
     /**
      * Add additional widgets.
@@ -72,7 +61,6 @@ class DashboardController extends Controller {
      *
      * @param WidgetGroup
      */
-    //  TODO: Uncomment the following after including Hook depencency.
     Hook::run('widgets.dashboard', Widget::group('dashboard'));
 
     return view('dashboard');
