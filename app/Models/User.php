@@ -2,12 +2,12 @@
 /**
  * User Model file.
  *
- * @package KYSS
+ * @package KYSS\Models
  * @copyright 2016 SqueezyWeb
  * @since 0.1.0
  */
 
-namespace App;
+namespace KYSS\Models;
 
 use Caffeinated\Shinobi\Traits\ShinobiTrait;
 use Illuminate\Auth\Authenticatable;
