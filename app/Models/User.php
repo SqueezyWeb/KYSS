@@ -45,4 +45,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
   protected $hidden = [
     'password', 'remember_token',
   ];
+
+  /**
+   * Roles that have the user.
+   *
+   * @since 0.2.0
+   * @access public
+   *
+   * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
+   */
+  public function roles() {
+    return $this->belongsToMany('KYSS\Models\Role');
+  }
 }
