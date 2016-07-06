@@ -9,7 +9,8 @@
 
 namespace KYSS\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
+// use Illuminate\Http\Request;
 use KYSS\Http\Requests\StoreRequest;
 use KYSS\Http\Requests\UpdateRequest;
 
@@ -50,7 +51,7 @@ class PermissionController extends Controller {
 
     $permissions = $this->getData();
 
-    return view('permissions.index', compact('permissions'));
+    return view('permission.index', compact('permissions'));
   }
 
   /**
@@ -91,7 +92,7 @@ class PermissionController extends Controller {
     if (!Shinobi::can(config('acl.permission.create', false)))
       return view('layouts.unauthorized', ['message' => 'create new permissions']);
 
-    return view('permissions.create')->with('route', $this->route);
+    return view('permission.create')->with('route', $this->route);
   }
 
   /**
@@ -131,7 +132,7 @@ class PermissionController extends Controller {
     $permission = Permission::findOrFail($id);
     $route = $this->route;
 
-    return view('permissions.show', compact('permission', 'route'));
+    return view('permission.show', compact('permission', 'route'));
   }
 
   /**
@@ -153,7 +154,7 @@ class PermissionController extends Controller {
     $permission = Permission::findOrFail($id);
     $route = $this->route;
 
-    return view('permissions.edit', compact('permission', 'route'));
+    return view('permission.edit', compact('permission', 'route'));
   }
 
   /**
@@ -220,7 +221,7 @@ class PermissionController extends Controller {
       $query->where('permission_id', $id);
     })->get();
 
-    return view('permissions.role', compact('permission', 'roles', 'available_roles'));
+    return view('permission.role', compact('permission', 'roles', 'available_roles'));
   }
 
   /**

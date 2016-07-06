@@ -53,7 +53,7 @@ class RoleController extends Controller {
 
     $roles = $this->getData();
 
-    return view('roles.index', compact('roles'));
+    return view('role.index', compact('roles'));
   }
 
   /**
@@ -94,7 +94,7 @@ class RoleController extends Controller {
     if (!Shinobi::can(config('acl.role.create', false)))
       return view('layouts.unauthorized', ['message' => 'create new roles']);
 
-    return view('roles.create')->with('route', $this->route);
+    return view('role.create')->with('route', $this->route);
   }
 
   /**
@@ -138,7 +138,7 @@ class RoleController extends Controller {
     $role = Role::findOrFail($id);
     $route = $this->route;
 
-    return view('roles.show', compact('resource', 'route'));
+    return view('role.show', compact('resource', 'route'));
   }
 
   /**
@@ -157,7 +157,7 @@ class RoleController extends Controller {
     $role = Role::findOrFail($id);
     $route = $this->route;
 
-    return view('roles.edit', compact('resource', 'route'));
+    return view('role.edit', compact('resource', 'route'));
   }
 
   /**
@@ -225,7 +225,7 @@ class RoleController extends Controller {
       $query->where('role_id', $id);
     })->get();
 
-    return view('roles.permission', compact('role', 'permissions', 'available_permissions'));
+    return view('role.permission', compact('role', 'permissions', 'available_permissions'));
   }
 
   /**
@@ -276,7 +276,7 @@ class RoleController extends Controller {
       $query->where('role_id', $id);
     })->get();
 
-    return view('roles.user', compact('role', 'users', 'available_users'));
+    return view('role.user', compact('role', 'users', 'available_users'));
   }
 
   /**

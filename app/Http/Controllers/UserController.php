@@ -9,11 +9,13 @@
 
 namespace KYSS\Http\Controllers;
 
-use KYSS\Models\User;
-use KYSS\Models\Role;
+use Illuminate\Http\Request;
 use KYSS\Http\Requests\UserStoreRequest;
 use KYSS\Http\Requests\UserUpdateRequest;
-use Illuminate\Http\Request;
+
+use KYSS\Models\User;
+use KYSS\Models\Role;
+
 use DB;
 use Shinobi;
 
@@ -41,17 +43,18 @@ class UserController extends Controller {
 
     // Search
     if ($request->has('q')) {
-      $value = $request->get('q');
+      $query = $request->get('q');
       // Search name, company, ...?
-      $users = User::where('name', 'LIKE', sprintf('%%%s%%', $value))
+      $users = User::where('name', 'LIKE', sprintf('%%%s%%', $query))
+        ->orWhere('email', 'LIKE', sprintf('%%%s%%', $query))
         ->orderBy('name')->paginate(config('view.pagination.users', 20));
-      session()->flash('q', $value);
+      session()->flash('q', $query);
     } else { // Full listing.
       $users = User::orderBy('name')->paginate(config('view.pagination.users', 20));
       session()->forget('q');
     }
 
-    return view('users.index', compact('users'));
+    return view('user.index', compact('users'));
   }
 
   /**
@@ -63,8 +66,8 @@ class UserController extends Controller {
    * @return Illuminate\View\View
    */
   public function create() {
-    if (Shinoby::can(config('acl.user.create', false)))
-      return view('users.create');
+    if (Shinobi::can(config('acl.user.create', false)))
+      return view('user.create');
     return view('layouts.unauthorized');
   }
 
@@ -80,7 +83,7 @@ class UserController extends Controller {
     $level = 'danger';
     $message = ' You are not allowed to create users.';
 
-    if (Shinoby::can(config('acl.user.create', false))) {
+    if (Shinobi::can(config('acl.user.create', false))) {
       User::create($request->all());
       $level = 'success';
       $message = '<i class="fa fa-check-square-o fa-1x"></i> Success! User created.';
@@ -100,14 +103,14 @@ class UserController extends Controller {
    * @return Reponse
    */
   public function show($id) {
-    if (!Shinoby::canAtLeast([
+    if (!Shinobi::canAtLeast([
       config('acl.user.show', false),
       config('acl.user.edit', false)
     ]))
       return view('layouts.unauthorized', ['message' => 'view users']);
 
     $user = User::findOrFail($id);
-    return view('users.show', compact('user'));
+    return view('user.show', compact('user'));
   }
 
   /**
@@ -120,11 +123,11 @@ class UserController extends Controller {
    * @return Response
    */
   public function edit($id) {
-    if (!Shinobi::canAtLeast(config('acl.user.edit', false)))
+    if (!Shinobi::can(config('acl.user.edit', false)))
       return view('layouts.unauthorized', ['message' => 'edit users']);
 
     $user = User::findOrFail($id);
-    return view('users.edit', compact('user'));
+    return view('user.edit', compact('user'));
   }
 
   /**
@@ -198,7 +201,7 @@ class UserController extends Controller {
       $query->where('user_id', $id);
     })->get();
 
-    return view('users.role', compact('user', 'roles', 'available_roles'));
+    return view('user.role', compact('user', 'roles', 'available_roles'));
   }
 
   /**

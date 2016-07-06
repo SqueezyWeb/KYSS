@@ -2,7 +2,7 @@
 
 namespace KYSS\Http\Controllers\Auth;
 
-use KYSS\User;
+use KYSS\Models\User;
 use Validator;
 use KYSS\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;

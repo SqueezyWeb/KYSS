@@ -48,7 +48,10 @@
         <!-- Left Side Of Navbar -->
         <ul class="nav navbar-nav">
           @if (!Auth::guest())
-            <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ route('user.index') }}">Users</a></li>
+            <li><a href="{{ route('role.index') }}">Roles</a></li>
+            <li><a href="{{ route('permission.index') }}">Permissions</a></li>
           @endif
         </ul>
 
@@ -79,7 +82,9 @@
     </div>
   </nav>
 
+<div class="container">
   @yield('content')
+</div>
 
   <!-- JavaScripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>

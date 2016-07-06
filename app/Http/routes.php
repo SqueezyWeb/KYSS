@@ -18,3 +18,32 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+/*
+|-------------------------------------------------------------------------
+|	Permission Routes
+|-------------------------------------------------------------------------
+*/
+Route::get('permission/role/{role}/edit', 'PermissionController@editRole')->name('permission.role.edit');
+Route::post('permission/role/{role}', 'PermissionController@updateRole')->name('permission.role.update');
+Route::resource('permission', 'PermissionController');
+
+/*
+|-------------------------------------------------------------------------
+|	Role Routes
+|-------------------------------------------------------------------------
+*/
+Route::get('role/permissions/{role}/edit', 'RoleController@editRolePermissions')->name('role.permissions.edit');
+Route::post('role/permissions/{role}', 'RoleController@updateRolePermissions')->name('role.permissions.update');
+Route::get('role/users/{role}/edit', 'RoleController@editRoleUsers')->name('role.users.edit');
+Route::post('role/users/{role}', 'RoleController@updateRoleUsers')->name('role.users.update');
+Route::resource('role', 'RoleController');
+
+/*
+|-------------------------------------------------------------------------
+|	User Routes
+|-------------------------------------------------------------------------
+*/
+Route::get('user/{user}/roles/edit', 'UserController@editUserRoles')->name('user.roles.edit');
+Route::post('user/{user}/roles', 'UserController@updateUserRoles')->name('user.roles.update');
+Route::resource('user', 'UserController');

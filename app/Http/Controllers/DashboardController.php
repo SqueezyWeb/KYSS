@@ -43,11 +43,9 @@ class DashboardController extends Controller {
    * @return \Illuminate\Http\Response
    */
   public function index() {
-    $layout = config('dashboard.layout', 'two-columns'); // Config option, default.
-    $layout = 'layouts.dashboard.'.trim($layout);
-    view()->share('layout', $layout);
-
-    Widget::group('dashboard')->addWidget('dashboard.Welcome');
+    Widget::group('dashboard.main')->addWidget('dashboard.Welcome');
+    Widget::group('dashboard.left')->addWidget('dashboard.Welcome');
+    Widget::group('dashboard.right')->addWidget('dashboard.Welcome');
 
     /**
      * Add additional widgets.
@@ -61,7 +59,8 @@ class DashboardController extends Controller {
      *
      * @param WidgetGroup
      */
-    Hook::run('widgets.dashboard', Widget::group('dashboard'));
+    foreach (['main', 'left', 'right'] as $position)
+      Hook::run('widgets.dashboard.'.$position, Widget::group('dashboard.'.$position));
 
     return view('dashboard');
   }
