@@ -99,17 +99,16 @@ class UserController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id Requested User ID.
+   * @param User $user Requested User object.
    * @return Reponse
    */
-  public function show($id) {
+  public function show(User $user) {
     if (!Shinobi::canAtLeast([
       config('acl.user.show', false),
       config('acl.user.edit', false)
     ]))
       return view('layouts.unauthorized', ['message' => 'view users']);
 
-    $user = User::findOrFail($id);
     return view('user.show', compact('user'));
   }
 
@@ -119,14 +118,13 @@ class UserController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id User ID.
+   * @param User $user Requested User object.
    * @return Response
    */
-  public function edit($id) {
+  public function edit(User $user) {
     if (!Shinobi::can(config('acl.user.edit', false)))
       return view('layouts.unauthorized', ['message' => 'edit users']);
 
-    $user = User::findOrFail($id);
     return view('user.edit', compact('user'));
   }
 
