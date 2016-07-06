@@ -7,7 +7,7 @@
  * @since 0.1.0
  */
 
-namespace App\Widgets\Dashboard;
+namespace KYSS\Widgets\Dashboard;
 
 use Arrilot\Widgets\AbstractWidget;
 

@@ -7,11 +7,11 @@
  * @since 0.1.0
  */
 
-namespace App\Http\Controllers;
+namespace KYSS\Http\Controllers;
 
 use Hook;
 use Widget;
-use App\Http\Requests;
+use KYSS\Http\Requests;
 use Illuminate\Http\Request;
 
 /**

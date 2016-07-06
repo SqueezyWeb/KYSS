@@ -151,10 +151,10 @@ return [
     /*
      * Application Service Providers...
      */
-    App\Providers\AppServiceProvider::class,
-    App\Providers\AuthServiceProvider::class,
-    App\Providers\EventServiceProvider::class,
-    App\Providers\RouteServiceProvider::class,
+    KYSS\Providers\KYSSServiceProvider::class,
+    KYSS\Providers\AuthServiceProvider::class,
+    KYSS\Providers\EventServiceProvider::class,
+    KYSS\Providers\RouteServiceProvider::class,
 
     Caffeinated\Shinobi\ShinobiServiceProvider::class, // Shinobi
     Collective\Html\HtmlServiceProvider::class, // For Watchtower Forms to function
@@ -178,7 +178,7 @@ return [
 
   'aliases' => [
 
-    'App' => Illuminate\Support\Facades\App::class,
+    'KYSS' => Illuminate\Support\Facades\App::class,
     'Artisan' => Illuminate\Support\Facades\Artisan::class,
     'Auth' => Illuminate\Support\Facades\Auth::class,
     'Blade' => Illuminate\Support\Facades\Blade::class,
