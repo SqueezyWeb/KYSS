@@ -13,7 +13,7 @@
 					<p><b>Name:</b></p>
 				</div>
 				<div class="col-sm-6">
-					<p>{{ $resource->name or '-' }}</p>
+					<p>{{ $user->name or '-' }}</p>
 				</div>
 			</div>
 			<div class="row">
@@ -21,7 +21,7 @@
 					<p><b>Email:</b></p>
 				</div>
 				<div class="col-sm-6">
-					<p>{{ $resource->email or '-' }}</p>
+					<p>{{ $user->email or '-' }}</p>
 				</div>
 			</div>
 		</div>
