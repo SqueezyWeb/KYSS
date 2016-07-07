@@ -5,7 +5,7 @@
   <h1>Users
     <a href="{{ route('user.create') }}" class="btn btn-primary btn-sm pull-right">
       <i class="fa fa-plus fa-fw"></i>
-      <span class="hidden-xs hidden-sm">Add new</span>
+      <span class="hidden-xs">Add new</span>
     </a>
   </h1>
 

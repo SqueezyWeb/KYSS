@@ -25,16 +25,16 @@
 
   <div class="form-group {{ $errors->has('password') ? 'has-error' : ''}}">
     {!! Form::label('password', 'Password: ', ['class' => 'col-sm-3 control-label']) !!}
-    <div class="col-md-6">
-      <input type="password" class="form-control" name="password">
+    <div class="col-sm-6">
+      {!! Form::password('password', ['class' => 'form-control']) !!}
       {!! $errors->first('password', '<div class="text-danger">:message</div>') !!}
     </div>
   </div>
 
   <div class="form-group {{ $errors->has('password_confirmation') ? 'has-error' : ''}}">
     {!! Form::label('password_confirmation', 'Confirm Password: ', ['class' => 'col-sm-3 control-label']) !!}
-    <div class="col-md-6">
-      <input type="password" class="form-control" name="password_confirmation">
+    <div class="col-sm-6">
+      {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
       {!! $errors->first('password_confirmation', '<div class="text-danger">:message</div>') !!}
     </div>
   </div>

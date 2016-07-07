@@ -72,19 +72,19 @@
      <div class="col-xs-4 col-md-2 col-md-offset-3">
        <a href="{{ route('user.show', $user->id) }}" class="btn btn-default form-control">
          <i class="fa fa-times fa-fw"></i>
-         <span class="hidden-xs hidden-sm">Cancel</span>
+         <span class="hidden-xs">Cancel</span>
        </a>
      </div>
      <div class="col-xs-4 col-md-2">
        <button class="btn btn-info form-control" type="button" data-toggle="collapse" data-target="#collapsePermissions" aria-expanded="false" aria-controls="collapsePermissions">
          <i class="fa fa-key fa-fw"></i>
-         <span class="hidden-xs hidden-sm">Permissions</span>
+         <span class="hidden-xs">Permissions</span>
        </button>
      </div>
       <div class="col-xs-4 col-md-2">
         <button type="submit" class="btn btn-primary form-control">
           <i class="fa fa-check fa-fw"></i>
-          <span class="hidden-xs hidden-sm">Update</span>
+          <span class="hidden-xs">Update</span>
         </button>
       </div>
   </div>

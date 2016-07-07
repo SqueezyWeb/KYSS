@@ -18,26 +18,6 @@ namespace KYSS\Http\Requests;
  */
 class UserUpdateRequest extends Request {
   /**
-   * {@internal: missing description}
-   *
-   * @since 0.1.0
-   * @access public
-   *
-   * @return array
-   */
-  public function all() {
-    $atts = parent::all();
-
-    if ($atts['password'] === $atts['password_confirmation']) {
-      $crypted = bcrypt($atts['password']);
-      $atts['password'] = $crypted;
-      $atts['password_confirmation'] = $crypted;
-    }
-
-    return $atts;
-  }
-
-  /**
    * Determine if user is authorized to make this request.
    *
    * @since 0.1.0
@@ -59,8 +39,8 @@ class UserUpdateRequest extends Request {
    */
   public function rules() {
     return [
-      'name' => 'required|max:255|unique:users,name,'.$this->user,
-      'email' => 'requred|email|unique:users,email,'.$this->user,
+      'name' => 'required|max:255|unique:users,name,'.$this->user->id,
+      'email' => 'required|email|unique:users,email,'.$this->user->id,
       'password' => 'confirmed|min:8'
     ];
   }

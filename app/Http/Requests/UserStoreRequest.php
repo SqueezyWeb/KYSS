@@ -25,17 +25,17 @@ class UserStoreRequest extends Request {
    *
    * @return array
    */
-  public function all() {
-    $atts = parent::all();
-
-    if ($atts['password'] === $atts['password_confirmation']) {
-      $crypted = bcrypt($atts['password']);
-      $atts['password'] = $crypted;
-      $atts['password_confirmation'] = $crypted;
-    }
-
-    return $atts;
-  }
+  // public function all() {
+  //   $atts = parent::all();
+  //
+  //   if ($atts['password'] === $atts['password_confirmation']) {
+  //     $crypted = bcrypt($atts['password']);
+  //     $atts['password'] = $crypted;
+  //     $atts['password_confirmation'] = $crypted;
+  //   }
+  //
+  //   return $atts;
+  // }
 
   /**
    * Determine if user is authorized to make this request.
