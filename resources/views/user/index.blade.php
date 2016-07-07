@@ -2,11 +2,14 @@
 
 @section('content')
 
-  <h1>Users
+  <h1>
+    Users
+  @if (Shinobi::can(config('acl.user.create', false)))
     <a href="{{ route('user.create') }}" class="btn btn-primary btn-sm pull-right">
       <i class="fa fa-plus fa-fw"></i>
       <span class="hidden-xs">Add new</span>
     </a>
+  @endif
   </h1>
 
   <div class="row">
@@ -19,7 +22,7 @@
   </div>
 
   <p>
-		Found {{ $users->total() }} {{ str_plural('record', $users->count()) }}.
+		Found {{ $users->total() }} {{ str_plural('user', $users->count()) }}.
   </p>
 
   <table class="table table-striped table-hover table-responsive">

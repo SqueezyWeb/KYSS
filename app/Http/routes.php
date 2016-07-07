@@ -24,8 +24,8 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 |	Permission Routes
 |-------------------------------------------------------------------------
 */
-Route::get('permission/role/{role}/edit', 'PermissionController@editRole')->name('permission.role.edit');
-Route::post('permission/role/{role}', 'PermissionController@updateRole')->name('permission.role.update');
+Route::get('permission/role/{role}/edit', 'PermissionController@editRole')->name('permission.roles.edit');
+Route::post('permission/role/{role}', 'PermissionController@updateRole')->name('permission.roles.update');
 Route::resource('permission', 'PermissionController');
 
 /*
