@@ -28,10 +28,10 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-2 col-md-offset-3 col-xs-4">
-			<a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary btn-block" title="Edit this user">
-				<i class="fa fa-pencil fa-fw"></i>
-				<span class="hidden-xs">Edit</span>
+		<div class="col-md-2 col-xs-4">
+			<a href="{{ route('user.index') }}" class="btn btn-default btn-block">
+				<i class="fa fa-arrow-left fa-fw"></i>
+				<span class="hidden-xs">Back</span>
 			</a>
 		</div>
 		<div class="col-md-2 col-xs-4">
@@ -40,10 +40,10 @@
 				<span class="hidden-xs">Roles</span>
 			</a>
 		</div>
-		<div class="col-md-2 col-xs-4">
-			<a href="{{ route('user.index') }}" class="btn btn-default btn-block">
-				<i class="fa fa-arrow-left fa-fw"></i>
-				<span class="hidden-xs">Back</span>
+		<div class="col-md-2 col-md-offset-3 col-xs-4">
+			<a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary btn-block" title="Edit this user">
+				<i class="fa fa-pencil fa-fw"></i>
+				<span class="hidden-xs">Edit</span>
 			</a>
 		</div>
 	</div>
