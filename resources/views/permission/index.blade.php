@@ -46,7 +46,7 @@
         @if ( Shinobi::can( config('acl.permission.edit', false)) )
           <a href="{{ route('permission.edit', $permission->id) }}" class="btn btn-default btn-xs">
             <i class="fa fa-pencil fa-fw"></i>
-            <span class="hidden-xs hidden-sm">Update</span>
+            <span class="hidden-xs hidden-sm">Edit</span>
           </a>
         @endif
 
