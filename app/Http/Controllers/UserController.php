@@ -134,15 +134,14 @@ class UserController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id User ID.
+   * @param User $user User object.
    * @return Response
    */
-  public function update($id, UserUpdateRequest $request) {
+  public function update(User $user, UserUpdateRequest $request) {
     $level = 'danger';
     $message = ' You are not permitted to update users.';
 
     if (Shinobi::can(config('acl.user.edit', false))) {
-      $user = User::findOrFail($id);
       if (empty($request->get('password')))
         $user->update($request->except('password'));
       else
@@ -152,7 +151,7 @@ class UserController extends Controller {
       $message = '<i class="fa fa-check-square-o fa-1x"></i> Success! User edited.';
     }
 
-    return redirect()->route('user.index')
+    return redirect()->route('user.show', $user->id)
       ->with(['flash' => compact('message', 'level')]);
   }
 
@@ -185,21 +184,20 @@ class UserController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id User ID.
+   * @param User $user User object.
    * @return Response
    */
-  public function editUserRoles($id) {
+  public function editUserRoles(User $user) {
     if (!Shinobi::can(config('acl.user.manage', false)))
       return view('layouts.unauthorized', ['message' => 'manage user roles']);
 
-    $user = User::findOrFail($id);
     $roles = $user->roles;
 
-    $available_roles = Role::whereDoesntHave('users', function($query) use ($id) {
-      $query->where('user_id', $id);
+    $available_roles = Role::whereDoesntHave('users', function($query) use ($user) {
+      $query->where('user_id', $user->id);
     })->get();
 
-    return view('user.role', compact('user', 'roles', 'available_roles'));
+    return view('user.roles', compact('user', 'roles', 'available_roles'));
   }
 
   /**
@@ -208,17 +206,15 @@ class UserController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id User ID.
+   * @param User $user User object.
    * @param Request
    * @return Response
    */
-  public function updateUserRoles($id, Request $request) {
+  public function updateUserRoles(User $user, Request $request) {
     $level = 'danger';
     $message = ' You are not permitted to update user roles.';
 
     if (Shinobi::can(config('acl.user.manage', false))) {
-      $user = User::findOrFail($id);
-
       if ($request->has('roles'))
         $user->roles()->sync($request->get('roles'));
       else
@@ -228,7 +224,7 @@ class UserController extends Controller {
       $message = '<i class="fa fa-check-square-o fa-1x"></i> Success! User roles edited.';
     }
 
-    return redirect()->route('user.index')
+    return redirect()->route('user.show', $user->id)
     ->with(['flash' => compact('message', 'level')]);
   }
 }

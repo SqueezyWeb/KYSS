@@ -1,29 +1,32 @@
-@extends(config('watchtower.views.layouts.master'))
+@extends('layouts.master')
 
 @section('content')
 
   <h1>'{{ $user->name }}' Roles</h1>
   <hr/>
 
-  {!! Form::model($user, [ 'route' => [ 'watchtower.user.role.update', $user->id ], 'class' => 'form-horizontal']) !!}
+  {!! Form::model($user, [ 'route' => [ 'user.roles.update', $user->id ], 'class' => 'form-horizontal']) !!}
 
   <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="panel panel-primary">
+    <div class="col-md-6">
+      <div class="panel panel-default">
         <div class="panel-heading clearfix">
-          <h2 class="panel-title"><i class="fa fa-lg fa-users"></i> Current Roles <small>({{$roles->count()}})</small></h2>
+          <h2 class="panel-title">
+            Current Roles
+            <small>({{$roles->count()}})</small>
+          </h2>
         </div>
-        
+
         <div class="panel-body">
           @forelse($roles->chunk(6) as $c)
             @foreach ($c as $r)
-            <div class="col-md-2 col-sm-3 col-xs-4">
+            <div class="col-sm-4 col-xs-6">
             <label class="checkbox-inline" title="{{ $r->id }}">
-              <input type="checkbox" name="ids[]" value="{{$r->id}}" checked=""> {{ $r->name }}
+              <input type="checkbox" name="roles[]" value="{{$r->id}}" checked=""> {{ $r->name }}
               @if ($r->special == 'all-access')
-                <i class="fa fa-star text-success"></i> 
+                <i class="fa fa-star text-success"></i>
               @elseif ($r->special == 'no-access')
-                <i class="fa fa-ban text-danger"></i> 
+                <i class="fa fa-ban text-danger"></i>
               @endif
             </label>
             </div>
@@ -34,26 +37,25 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="panel panel-primary">
+    <div class="col-md-6">
+      <div class="panel panel-default">
         <div class="panel-heading clearfix">
           <h2 class="panel-title">
-          <i class="fa fa-users"></i> Available Roles <small>({{$available_roles->count()}})</small></h2>
+            Available Roles <small>({{$available_roles->count()}})</small>
+          </h2>
         </div>
-        
+
         <div class="panel-body">
           @forelse($available_roles->chunk(6) as $chunk)
             @foreach ($chunk as $ar)
-            <div class="col-md-2 col-sm-3 col-xs-4">
+            <div class="col-sm-4 col-xs-6">
             <label class="checkbox-inline" title="{{ $ar->id }}">
-              <input type="checkbox" name="ids[]" value="{{$ar->id}}"> {{ $ar->name }}
+              <input type="checkbox" name="roles[]" value="{{$ar->id}}"> {{ $ar->name }}
               @if ($ar->special == 'all-access')
-                <i class="fa fa-star text-success"></i> 
+                <i class="fa fa-star text-success"></i>
               @elseif ($ar->special == 'no-access')
-                <i class="fa fa-ban text-danger"></i> 
+                <i class="fa fa-ban text-danger"></i>
               @endif
             </label>
             </div>
@@ -67,12 +69,22 @@
   </div>
 
    <div class="form-group">
-      <div class="col-sm-3">
-          {!! Form::submit('Update Roles', ['class' => 'btn btn-primary form-control']) !!}
-      </div>
-      <div class="col-sm-9">
-        <button class="btn btn-info pull-right" type="button" data-toggle="collapse" data-target="#collapsePermissions" aria-expanded="false" aria-controls="collapsePermissions">
-          Toggle Permissions
+     <div class="col-xs-4 col-md-2 col-md-offset-3">
+       <a href="{{ route('user.show', $user->id) }}" class="btn btn-default form-control">
+         <i class="fa fa-times fa-fw"></i>
+         <span class="hidden-xs hidden-sm">Cancel</span>
+       </a>
+     </div>
+     <div class="col-xs-4 col-md-2">
+       <button class="btn btn-info form-control" type="button" data-toggle="collapse" data-target="#collapsePermissions" aria-expanded="false" aria-controls="collapsePermissions">
+         <i class="fa fa-key fa-fw"></i>
+         <span class="hidden-xs hidden-sm">Permissions</span>
+       </button>
+     </div>
+      <div class="col-xs-4 col-md-2">
+        <button type="submit" class="btn btn-primary form-control">
+          <i class="fa fa-check fa-fw"></i>
+          <span class="hidden-xs hidden-sm">Update</span>
         </button>
       </div>
   </div>
@@ -80,14 +92,14 @@
   {!! Form::close() !!}
 
   <div class="row panel-collapse collapse" id="collapsePermissions">
-    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="col-xs-12">
       <div class="panel panel-info">
         <div class="panel-heading clearfix">
           <h2 class="panel-title"><i class="fa fa-key"></i> {{$user->name}}'s Permissions (from current roles)</small></h2>
         </div>
-        
+
         <div class="panel-body">
-          <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="col-xs-12">
             <ul class="list-unstyled">
               @forelse($roles as $prole)
               <li><strong>{{$prole->name}}</strong></li>

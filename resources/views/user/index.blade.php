@@ -59,7 +59,7 @@
         </a>
       @endif
 
-      @if ( Shinobi::can( config('acl.user.role', false)) )
+      @if ( Shinobi::can( config('acl.user.roles', false)) )
         <a href="{{ route('user.roles.edit', $user->id) }}">
           <button type="button" class="btn btn-default btn-xs">
             <i class="fa fa-users fa-fw"></i>
