@@ -40,8 +40,17 @@
   </div>
 
   <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-3">
-      {!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}
+    <div class="col-xs-6 col-sm-offset-3 col-sm-3">
+      <a href="{{ route('user.index') }}" class="btn btn-default form-control">
+        <i class="fa fa-times fa-fw"></i>
+        <span class="hidden-xs">Cancel</span>
+      </a>
+    </div>
+    <div class="col-xs-6 col-sm-3">
+      <button type="submit" class="btn btn-primary form-control">
+        <i class="fa fa-check fa-fw"></i>
+        <span class="hidden-xs">Create</span>
+      </button>
     </div>
   </div>
 
