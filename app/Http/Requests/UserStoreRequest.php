@@ -14,29 +14,9 @@ namespace KYSS\Http\Requests;
  *
  * @author Mattia Migliorini <mattia@squeezyweb.com>
  * @since 0.1.0
- * @version 0.1.0
+ * @version 0.2.0
  */
 class UserStoreRequest extends Request {
-  /**
-   * {@internal: missing description}
-   *
-   * @since 0.1.0
-   * @access public
-   *
-   * @return array
-   */
-  // public function all() {
-  //   $atts = parent::all();
-  //
-  //   if ($atts['password'] === $atts['password_confirmation']) {
-  //     $crypted = bcrypt($atts['password']);
-  //     $atts['password'] = $crypted;
-  //     $atts['password_confirmation'] = $crypted;
-  //   }
-  //
-  //   return $atts;
-  // }
-
   /**
    * Determine if user is authorized to make this request.
    *

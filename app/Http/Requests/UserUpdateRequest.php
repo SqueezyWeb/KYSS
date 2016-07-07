@@ -14,7 +14,7 @@ namespace KYSS\Http\Requests;
  *
  * @author Mattia Migliorini <mattia@squeezyweb.com>
  * @since 0.1.0
- * @version 0.1.0
+ * @version 0.2.0
  */
 class UserUpdateRequest extends Request {
   /**
