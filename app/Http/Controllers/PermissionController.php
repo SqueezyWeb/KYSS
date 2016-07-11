@@ -93,7 +93,7 @@ class PermissionController extends Controller {
     if (!Shinobi::can(config('acl.permission.create', false)))
       return view('layouts.unauthorized', ['message' => 'create new permissions']);
 
-    return view('permission.create')->with('route', $this->route);
+    return view('permission.create');
   }
 
   /**

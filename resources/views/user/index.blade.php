@@ -48,7 +48,7 @@
         config('acl.user.edit', false)
       ]))
         <a href="{{ route('user.show', $user->id) }}" class="btn btn-default btn-xs">
-          <i class="fa fa-user fa-fw"></i>
+          <i class="fa fa-eye fa-fw"></i>
           <span class="hidden-xs hidden-sm">View</span>
         </a>
       @endif

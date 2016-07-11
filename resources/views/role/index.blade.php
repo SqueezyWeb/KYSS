@@ -1,101 +1,106 @@
-@extends(config('watchtower.views.layouts.master'))
+@extends('layouts.master')
 
 @section('content')
 
-    <h1>Roles
-    <div class="btn-group pull-right" role="group" aria-label="...">
-      @if ( Shinobi::can( config('watchtower.acl.role.viewmatrix', false) ) )
-      <a href="{{ route( config('watchtower.route.as') .'role.matrix') }}">
-      <button type="button" class="btn btn-default">
-        <i class="fa fa-th fa-fw"></i> 
-        <span class="hidden-xs hidden-sm">Role Matrix</span>
-      </button></a>
-      @endif
+  <h1>
+    Roles
+  @if (Shinobi::can(config('acl.role.create', false)))
+    <a href="{{ route('role.create') }}" class="btn btn-primary btn-sm pull-right">
+      <i class="fa fa-plus fa-fw"></i>
+      <span class="hidden-xs">Add new</span>
+    </a>
+  @endif
+  </h1>
 
-      @if ( Shinobi::can( config('watchtower.acl.role.create', false) ) )
-        <a href="{{ route( config('watchtower.route.as') .'role.create') }}">
-        <button type="button" class="btn btn-info">
-          <i class="fa fa-plus fa-fw"></i> 
-          <span class="hidden-xs hidden-sm">Add New Role</span>
-        </button></a>
-      @endif
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+      @include('partials.search', [
+        'search_route' => 'role.index',
+        'items' => $roles
+      ])
     </div>
-    </h1>
+  </div>
 
-    <!-- search bar -->
-    @include( config('watchtower.views.layouts.search'), [ 'search_route' => config('watchtower.route.as') .'role.index', 'items' => $roles, 'acl' => 'role' ] )
+  <p>
+    Found {{ $roles->total() }} {{ str_plural('role', $roles->count()) }}.
+  </p>
 
-    <div class="table">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>#</th><th>Name</th><th>Actions</th>
-                </tr>
-            </thead>
+    <table class="table table-hover table-striped table-responsive">
+      <thead>
+        <tr>
+          <th>Name</th><th>Actions</th>
+        </tr>
+      </thead>
 
-            <tbody>
-              @forelse($roles as $item)
-               <tr>
-                <td>{{ $item->id }}</td>
-                
-                <td>
-                    <a href="{{ route( config('watchtower.route.as') .'role.show', $item->id) }}">{{ $item->name }}</a>
-                    @if ($item->special == 'all-access')
-                      <i class="fa fa-star text-success"></i> 
-                    @elseif ($item->special == 'no-access')
-                      <i class="fa fa-ban text-danger"></i> 
-                    @endif
-                </td>
-                
-                <td>
-                    @if ( Shinobi::can( config('watchtower.acl.role.permission', false)) )
-                    <a href="{{ route( config('watchtower.route.as') .'role.permission.edit', $item->id) }}">
-                      <button type="button" class="btn btn-primary btn-xs">
-                      <i class="fa fa-key fa-fw"></i> 
-                      <span class="hidden-xs hidden-sm">Permissions</span>
-                      </button></a>
-                    @endif
+      <tbody>
+      @forelse($roles as $role)
+      <tr>
+        <td>
+          <a href="{{ route('role.show', $role->id) }}">{{ $role->name }}</a>
+        @if ($role->special == 'all-access')
+          <i class="fa fa-star text-success"></i>
+        @elseif ($role->special == 'no-access')
+          <i class="fa fa-ban text-danger"></i>
+        @endif
+        </td>
 
-                    @if ( Shinobi::can( config('watchtower.acl.role.user', false)) )
-                    <a href="{{ route( config('watchtower.route.as') .'role.user.edit', $item->id) }}">
-                      <button type="button" class="btn btn-primary btn-xs">
-                      <i class="fa fa-user fa-fw"></i> 
-                      <span class="hidden-xs hidden-sm">Users</span>
-                      </button></a>
-                    @endif
+        <td>
+        @if (Shinobi::can(config('acl.role.show', false)))
+          <a href="{{ route('role.show', $role->id) }}" class="btn btn-default btn-xs">
+            <i class="fa fa-eye fa-fw"></i>
+            <span class="hidden-xs hidden-sm">View</span>
+          </a>
+        @endif
+        
+        @if (Shinobi::can(config('acl.role.edit', false)))
+          <a href="{{ route('role.edit', $role->id) }}" class="btn btn-default btn-xs">
+            <i class="fa fa-pencil fa-fw"></i>
+            <span class="hidden-xs hidden-sm">Edit</span>
+          </a>
+        @endif
 
-                    @if ( Shinobi::can( config('watchtower.acl.role.edit', false)) )
-                    <a href="{{ route( config('watchtower.route.as') .'role.edit', $item->id) }}">
-                      <button type="button" class="btn btn-default btn-xs">
-                      <i class="fa fa-pencil fa-fw"></i> 
-                      <span class="hidden-xs hidden-sm">Update</span>
-                      </button></a>
-                    @endif
+        @if (Shinobi::can(config('acl.role.permissions', false)))
+        <a href="{{ route('role.permissions.edit', $role->id) }}" class="btn btn-default btn-xs">
+          <i class="fa fa-key fa-fw"></i>
+          <span class="hidden-xs hidden-sm">Permissions</span>
+        </a>
+        @endif
 
-                    @if ( Shinobi::can( config('watchtower.acl.role.destroy', false)) )
-                      {!! Form::open(['method'=>'delete','route'=> [ config('watchtower.route.as') .'role.destroy',$item->id], 'style' => 'display:inline']) !!}
-                        <button type="submit" class="btn btn-danger btn-xs">
-                        <i class="fa fa-trash-o fa-lg"></i> 
-                        <span class="hidden-xs hidden-sm">Delete</span>
-                        </button>
-                      {!! Form::close() !!}
-                    @endif
-                </td>
-               </tr>
-              @empty
-                <tr><td>There are no roles</td></tr>
-              @endforelse
+        @if (Shinobi::can(config('acl.role.users', false)))
+          <a href="{{ route('role.users.edit', $role->id) }}" class="btn btn-default btn-xs">
+            <i class="fa fa-user fa-fw"></i>
+            <span class="hidden-xs hidden-sm">Users</span>
+          </a>
+        @endif
 
-              <!-- pagination -->
-              <tfoot>
-                <tr>
-                 <td colspan="3" class="text-center small">
-                  {!! $roles->render() !!}
-                 </td>
-                </tr>
-              </tfoot>
-            </tbody>
-        </table>
-    </div>
+        @if (Shinobi::can(config('acl.role.destroy', false)))
+          {!! Form::open([
+            'method'=>'delete',
+            'route'=> ['role.destroy', $role->id],
+            'style' => 'display:inline'
+          ]) !!}
+            <button type="submit" class="btn btn-danger btn-xs">
+              <i class="fa fa-trash-o fa-lg"></i>
+              <span class="hidden-xs hidden-sm">Delete</span>
+            </button>
+          {!! Form::close() !!}
+        @endif
+        </td>
+       </tr>
+      @empty
+        <tr><td>There are no roles</td></tr>
+      @endforelse
+
+        <!-- pagination -->
+        <tfoot>
+          <tr>
+           <td colspan="3" class="text-center small">
+            {!! $roles->render() !!}
+           </td>
+          </tr>
+        </tfoot>
+      </tbody>
+    </table>
+  </div>
 
 @endsection

@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<h1>Create New {{ $model }}</h1>
+	<h1>Create New {{ ucfirst($model) }}</h1>
 
 	<hr>
 
@@ -38,7 +38,7 @@
 
 
 	@if ($route == 'role')
-		<div class="form-group">
+		<div class="form-group {{ $errors->has('special') ? 'has-error' : '' }}">
 			{!! Form::label('special', 'Special Access: ', ['class' => 'col-sm-3 control-label']) !!}
 			<div class="col-sm-6">
 				{!! Form::select('special', [

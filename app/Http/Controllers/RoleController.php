@@ -51,7 +51,7 @@ class RoleController extends Controller {
     if (!Shinobi::can(config('acl.role.index', false)))
       return view('layouts.unauthorized', ['message' => 'view role list']);
 
-    $roles = $this->getData();
+    $roles = $this->getData($request);
 
     return view('role.index', compact('roles'));
   }
@@ -64,11 +64,12 @@ class RoleController extends Controller {
    * @since 0.1.0
    * @access protected
    *
+   * @param Request $request
    * @return array Roles
    */
-  protected function getData() {
-    if (Request::has('q')) {
-      $query = Request::get('q');
+  protected function getData(Request $request) {
+    if ($request->has('q')) {
+      $query = $request->get('q');
       $roles = Role::where('name', 'LIKE', sprintf('%%%s%%', $query))
         ->orWhere('slug', 'LIKE', sprintf('%%%s%%', $query))
         ->orWhere('description', 'LIKE', sprintf('%%%s%%', $query))
@@ -94,7 +95,7 @@ class RoleController extends Controller {
     if (!Shinobi::can(config('acl.role.create', false)))
       return view('layouts.unauthorized', ['message' => 'create new roles']);
 
-    return view('role.create')->with('route', $this->route);
+    return view('role.create');
   }
 
   /**
@@ -125,20 +126,19 @@ class RoleController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id Role ID.
+   * @param Role $role Role object.
    * @return Response
    */
-  public function show($id) {
+  public function show(Role $role) {
     if (!Shinobi::canAtLeast([
       config('acl.role.edit', false),
       config('acl.role.show', false)
     ]))
       return view('layouts.unauthorized', ['message' => 'view roles']);
 
-    $role = Role::findOrFail($id);
     $route = $this->route;
 
-    return view('role.show', compact('resource', 'route'));
+    return view('role.show', compact('role', 'route'));
   }
 
   /**
@@ -147,17 +147,16 @@ class RoleController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id Role ID.
+   * @param Role $role Role object.
    * @return Response
    */
-  public function edit($id) {
+  public function edit(Role $role) {
     if (!Shinobi::can(config('acl.role.edit', false)))
       return view('layouts.unauthorized', ['message' => 'edit roles']);
 
-    $role = Role::findOrFail($id);
     $route = $this->route;
 
-    return view('role.edit', compact('resource', 'route'));
+    return view('role.edit', compact('role', 'route'));
   }
 
   /**
@@ -166,22 +165,21 @@ class RoleController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id Role ID.
+   * @param Role $role Role object.
    * @param UpdateRequest $request
    * @return Response
    */
-  public function update($id, UpdateRequest $request) {
+  public function update(Role $role, UpdateRequest $request) {
     $level = 'danger';
     $message = ' You are not allowed to update roles.';
 
     if (Shinobi::can(config('acl.role.edit', false))) {
-      $role = Role::findOrFail($id);
       $role->update($request->all());
       $level = 'success';
       $message = '<i class="fa fa-check-square-o fa-1x"></i> Success! Role edited.';
     }
 
-    return redirect()->route('role.index')->with(['flash' => compact('message', 'level')]);
+    return redirect()->route('role.show', $role->id)->with(['flash' => compact('message', 'level')]);
   }
 
   /**
@@ -212,20 +210,19 @@ class RoleController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id Role ID.
+   * @param Role $role Role object.
    * @return Response
    */
-  public function editRolePermissions($id) {
+  public function editRolePermissions(Role $role) {
     if (!Shinobi::can(config('acl.role.permissions', false)))
       return view('layouts.unauthorized', ['message' => 'sync role permissions']);
 
-    $role = Role::findOrFail($id);
     $permissions = $role->permissions;
-    $available_permissions = Permission::whereDoesntHave('roles', function($query) use ($id) {
-      $query->where('role_id', $id);
+    $available_permissions = Permission::whereDoesntHave('roles', function($query) use ($role) {
+      $query->where('role_id', $role->id);
     })->get();
 
-    return view('role.permission', compact('role', 'permissions', 'available_permissions'));
+    return view('role.permissions', compact('role', 'permissions', 'available_permissions'));
   }
 
   /**
@@ -234,19 +231,17 @@ class RoleController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id Role ID.
+   * @param Role $role Role object.
    * @param Request $request
    * @return Response
    */
-  public function updateRolePermissions($id, Request $request) {
+  public function updateRolePermissions(Role $role, Request $request) {
     $level = 'danger';
     $message = ' You are not allowed to update role permissions.';
 
     if (Shinobi::can(config('acl.role.permissions', false))) {
-      $role = Role::findOrFail($id);
-
-      if ($request->has('slug'))
-        $role->permissions()->sync($request->get('slug'));
+      if ($request->has('permissions'))
+        $role->permissions()->sync($request->get('permissions'));
       else
         $role->permissions()->detach();
 
@@ -254,7 +249,7 @@ class RoleController extends Controller {
       $message = '<i class="fa fa-check-square-o fa-1x"></i> Success! Role permissions updated.';
     }
 
-    return redirect()->route('role.index')->with(['flash' => compact('message', 'level')]);
+    return redirect()->route('role.show', $role->id)->with(['flash' => compact('message', 'level')]);
   }
 
   /**
@@ -263,20 +258,19 @@ class RoleController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id Role ID.
+   * @param Role $role Role object.
    * @return Response
    */
-  public function editRoleUsers($id) {
+  public function editRoleUsers(Role $role) {
     if (!Shinobi::can(config('acl.role.users', false)))
       return view('layouts.unauthorized', ['message' => 'sync role users']);
 
-    $role = Role::findOrFail($id);
     $users = $role->users;
-    $available_users = User::whereDoesntHave('roles', function($query) use ($id) {
-      $query->where('role_id', $id);
+    $available_users = User::whereDoesntHave('roles', function($query) use ($role) {
+      $query->where('role_id', $role->id);
     })->get();
 
-    return view('role.user', compact('role', 'users', 'available_users'));
+    return view('role.users', compact('role', 'users', 'available_users'));
   }
 
   /**
@@ -285,19 +279,17 @@ class RoleController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id Role ID.
+   * @param Role $role Role object.
    * @param Request $request
    * @return Response
    */
-  public function updateRoleUsers($id, Request $request) {
+  public function updateRoleUsers(Role $role, Request $request) {
     $level = 'danger';
     $message = ' You are not allowed to update role users.';
 
     if (Shinobi::can(config('acl.role.users', false))) {
-      $role = Role::findOrFail($id);
-
-      if ($request->has('slug'))
-        $role->users()->sync($request->get('slug'));
+      if ($request->has('users'))
+        $role->users()->sync($request->get('users'));
       else
         $role->users()->detach();
 
@@ -305,6 +297,6 @@ class RoleController extends Controller {
       $message = '<i class="fa fa-check-square-o fa-1x"></i> Success! Role users updated.';
     }
 
-    return redirect()->route('role.index')->with(['flash' => compact('message', 'level')]);
+    return redirect()->route('role.show', $role->id)->with(['flash' => compact('message', 'level')]);
   }
 }
