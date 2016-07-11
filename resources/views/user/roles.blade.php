@@ -76,7 +76,7 @@
        </a>
      </div>
      <div class="col-xs-4 col-md-2">
-       <button class="btn btn-info form-control" type="button" data-toggle="collapse" data-target="#collapsePermissions" aria-expanded="false" aria-controls="collapsePermissions">
+       <button class="btn btn-primary form-control" type="button" data-toggle="collapse" data-target="#collapsePermissions" aria-expanded="false" aria-controls="collapsePermissions">
          <i class="fa fa-key fa-fw"></i>
          <span class="hidden-xs">Permissions</span>
        </button>
