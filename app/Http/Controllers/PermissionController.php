@@ -9,8 +9,7 @@
 
 namespace KYSS\Http\Controllers;
 
-use Request;
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use KYSS\Http\Requests\StoreRequest;
 use KYSS\Http\Requests\UpdateRequest;
 
@@ -43,13 +42,14 @@ class PermissionController extends Controller {
    * @since 0.1.0
    * @access public
    *
+   * @param Request $request HTTP request.
    * @return Response
    */
-  public function index() {
+  public function index(Request $request) {
     if (!Shinobi::can(config('acl.permission.index', false)))
       return view('layouts.unauthorized', ['message' => 'view permission list']);
 
-    $permissions = $this->getData();
+    $permissions = $this->getData($request);
 
     return view('permission.index', compact('permissions'));
   }
@@ -62,11 +62,12 @@ class PermissionController extends Controller {
    * @since 0.1.0
    * @access protected
    *
+   * @param Request $request HTTP request.
    * @return array Permissions
    */
-  protected function getData() {
-    if (Request::has('q')) {
-      $query = Request::get('q');
+  protected function getData(Request $request) {
+    if ($request->has('q')) {
+      $query = $request->get('q');
       $permissions = Permission::where('name', 'LIKE', sprintf('%%%s%%', $query))
         ->orWhere('slug', 'LIKE', sprintf('%%%s%%', $query))
         ->orWhere('description', 'LIKE', sprintf('%%%s%%', $query))
@@ -122,17 +123,16 @@ class PermissionController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id Permission ID.
+   * @param Permission $permission Permission object.
    * @return Response
    */
-  public function show($id) {
+  public function show(Permission $permission) {
     if (!Shinobi::canAtLeast([config('acl.permission.show', false), config('acl.permission.edit', false)]))
       return view('layouts.unauthorized', ['message' => 'view permissions']);
 
-    $permission = Permission::findOrFail($id);
     $route = $this->route;
 
-    return view('permission.show', compact('permission', 'route'));
+    return view('permission.show', compact('permission'));
   }
 
   /**
@@ -141,17 +141,16 @@ class PermissionController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id Permission ID.
+   * @param Permission $permission Permission object.
    * @return Response
    */
-  public function edit($id) {
+  public function edit(Permission $permission) {
     if (!Shinobi::canAtLeast([
       config('acl.permission.edit', false),
       config('acl.permission.show', false)
     ]))
       return view('layouts.unauthorized', ['message' => 'edit permissions']);
 
-    $permission = Permission::findOrFail($id);
     $route = $this->route;
 
     return view('permission.edit', compact('permission', 'route'));
@@ -163,21 +162,20 @@ class PermissionController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id Permission ID.
+   * @param Permission $permission Permission object.
    * @return Response
    */
-  public function update($id, UpdateRequest $request) {
+  public function update(Permission $permission, UpdateRequest $request) {
     $level = 'danger';
     $message = ' You are not allowed to update permissions.';
 
     if (Shinobi::can(config('acl.permission.edit', false))) {
-      $permission = Permission::findOrFail($id);
       $permission->update($request->all());
       $level = 'success';
       $message = '<i class="fa fa-check-square-o fa-1x"></i> Success! Permission edited.';
     }
 
-    return redirect()->route('permission.index')->with(['flash' => compact('message', 'level')]);
+    return redirect()->route('permission.show', $permission->id)->with(['flash' => compact('message', 'level')]);
   }
 
   /**
@@ -208,20 +206,19 @@ class PermissionController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id Permission ID.
+   * @param Permission $permission Permission object.
    * @return Response
    */
-  public function editRole($id) {
-    if (!Shinobi::can(config('acl.permission.role', false)))
+  public function editRoles(Permission $permission) {
+    if (!Shinobi::can(config('acl.permission.roles', false)))
       return view('layouts.unauthorized', ['message' => 'sync permission roles']);
 
-    $permission = Permission::findOrFail($id);
     $roles = $permission->roles;
-    $available_roles = Role::whereDoesntHave('permissions', function($query) use ($id) {
-      $query->where('permission_id', $id);
+    $available_roles = Role::whereDoesntHave('permissions', function($query) use ($permission) {
+      $query->where('permission_id', $permission->id);
     })->get();
 
-    return view('permission.role', compact('permission', 'roles', 'available_roles'));
+    return view('permission.roles', compact('permission', 'roles', 'available_roles'));
   }
 
   /**
@@ -230,25 +227,23 @@ class PermissionController extends Controller {
    * @since 0.1.0
    * @access public
    *
-   * @param int $id Permission ID.
+   * @param Permission $permission Permission object.
    * @return Response
    */
-  public function updateRole($id, Request $request) {
+  public function updateRoles(Permission $permission, Request $request) {
     $level = 'danger';
     $message = ' You are not allowed to update permissions.';
 
-    if (Shinobi::can(config('acl.permission.role', false))) {
-      $permission = Permission::findOrFail($id);
-
-      if ($request->has('slug'))
-        $permission->roles()->sync($request->get('slug'));
+    if (Shinobi::can(config('acl.permission.roles', false))) {
+      if ($request->has('roles'))
+        $permission->roles()->sync($request->get('roles'));
       else
-        $permission->roles()->sync($request->get('slug'));
+        $permission->roles()->detach();
 
       $level = 'success';
       $message = '<i class="fa fa-check-square-o fa-1x"></i> Success! Permission roles edited.';
     }
 
-    return redirect()->route('permission.index')->with(['flash' => compact('message', 'level')]);
+    return redirect()->route('permission.show', $permission->id)->with(['flash' => compact('message', 'level')]);
   }
 }

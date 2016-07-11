@@ -24,8 +24,8 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 |	Permission Routes
 |-------------------------------------------------------------------------
 */
-Route::get('permission/role/{role}/edit', 'PermissionController@editRole')->name('permission.roles.edit');
-Route::post('permission/role/{role}', 'PermissionController@updateRole')->name('permission.roles.update');
+Route::get('permission/{permission}/roles/edit', 'PermissionController@editRoles')->name('permission.roles.edit');
+Route::post('permission/{permission}/roles', 'PermissionController@updateRoles')->name('permission.roles.update');
 Route::resource('permission', 'PermissionController');
 
 /*
@@ -33,10 +33,10 @@ Route::resource('permission', 'PermissionController');
 |	Role Routes
 |-------------------------------------------------------------------------
 */
-Route::get('role/permissions/{role}/edit', 'RoleController@editRolePermissions')->name('role.permissions.edit');
-Route::post('role/permissions/{role}', 'RoleController@updateRolePermissions')->name('role.permissions.update');
-Route::get('role/users/{role}/edit', 'RoleController@editRoleUsers')->name('role.users.edit');
-Route::post('role/users/{role}', 'RoleController@updateRoleUsers')->name('role.users.update');
+Route::get('role/{role}/permissions/edit', 'RoleController@editRolePermissions')->name('role.permissions.edit');
+Route::post('role/{role}/permissions', 'RoleController@updateRolePermissions')->name('role.permissions.update');
+Route::get('role/{role}/users/edit', 'RoleController@editRoleUsers')->name('role.users.edit');
+Route::post('role/{role}/users', 'RoleController@updateRoleUsers')->name('role.users.update');
 Route::resource('role', 'RoleController');
 
 /*

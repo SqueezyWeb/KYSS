@@ -38,13 +38,12 @@ class UpdateRequest extends Request {
    * @return array
    */
   public function rules() {
-    $id = ($this->route('permission')) ?: $this->route('role');
-
-    $table = str_plural($this->route()->parameterNames()[0]);
+    $model = strpos($this->route()->getName(), 'permission') !== false ? 'permission' : 'role';
+    $table = str_plural($model);
 
     return [
-      'slug' => 'required|unique:'.$table.',slug,'.$id.'|max:255|min:4',
-      'name' => 'required|unique:'.$table.',name,'.$id.'|max:255|min:4'
+      'slug' => 'required|unique:'.$table.',slug,'.$this->{$model}->id.'|max:255|min:4',
+      'name' => 'required|unique:'.$table.',name,'.$this->{$model}->id.'|max:255|min:4'
     ];
   }
 }
