@@ -29,12 +29,18 @@ class PermissionsTableSeeder extends Seeder {
   public function run() {
     $permissions = [
       [
-        'name' => 'Show Widgets',
-        'slug' => 'show.widget',
-        'description' => 'View a generic widget'
+        'name' => 'Manage Users',
+        'slug' => 'manage.users',
+        'description' => 'Manage users, roles, and permissions.'
+      ],
+      [
+        'name' => 'View dashboard',
+        'slug' => 'show.dashboard',
+        'description' => 'See the main dashboard'
       ]
     ];
 
+    // Insert permissions.
     DB::table('permissions')->insert($permissions);
   }
 }
