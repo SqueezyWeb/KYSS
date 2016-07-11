@@ -84,7 +84,9 @@ class UserController extends Controller {
     $message = ' You are not allowed to create users.';
 
     if (Shinobi::can(config('acl.user.create', false))) {
-      User::create($request->all());
+      $data = empty($request->get('password')) ? $request->all() : array_add($request->except('password'), 'password', bcrypt($request->get('password')));
+
+      User::create($data);
       $level = 'success';
       $message = '<i class="fa fa-check-square-o fa-1x"></i> Success! User created.';
     }
@@ -142,10 +144,11 @@ class UserController extends Controller {
     $message = ' You are not permitted to update users.';
 
     if (Shinobi::can(config('acl.user.edit', false))) {
-      if (empty($request->get('password')))
-        $user->update($request->except('password'));
-      else
-        $user->update($request->all());
+      $data = $request->except('password');
+      if (!empty($request->get('password')))
+        $data['password'] = bcrypt($request->get('password'));
+
+      $user->update($data);
 
       $level = 'success';
       $message = '<i class="fa fa-check-square-o fa-1x"></i> Success! User edited.';

@@ -41,11 +41,5 @@ class EventServiceProvider extends ServiceProvider {
    */
   public function boot(DispatcherContract $events) {
     parent::boot($events);
-
-    User::saving(function(User $user) {
-      if (isset($user->password))
-        $user->password = bcrypt($user->password);
-      return $user;
-    });
   }
 }

@@ -9,6 +9,8 @@
 
 namespace KYSS\Database\Seeds;
 
+use DB;
+
 use Illuminate\Database\Seeder;
 
 /**
