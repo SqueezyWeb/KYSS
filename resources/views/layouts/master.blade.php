@@ -64,9 +64,6 @@
               <li><a href="{{ url('/register') }}">Register</a></li>
             @endif
           @else
-            @can ('show.watchtower.index')
-              <li><a href="{{ url('/watchtower') }}"><i class="fa fa-btn fa-lock"></i>Admin</a></li>
-            @endcan
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                 <i class="fa fa-btn fa-user"></i>{{ Auth::user()->name }} <span class="caret"></span>

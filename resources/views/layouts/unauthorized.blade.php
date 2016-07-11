@@ -1,4 +1,4 @@
-@extends(config('watchtower.views.layouts.master'))
+@extends('layouts.master')
 
 @section('content')
 
