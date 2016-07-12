@@ -7,12 +7,13 @@
  * @since 0.1.0
  */
 
-namespace App\Http\Controllers;
+namespace KYSS\Http\Controllers;
 
 use Hook;
 use Widget;
-use App\Http\Requests;
+use KYSS\Http\Requests;
 use Illuminate\Http\Request;
+use Shinobi;
 
 /**
  * Dashboard Controller.
@@ -43,11 +44,12 @@ class DashboardController extends Controller {
    * @return \Illuminate\Http\Response
    */
   public function index() {
-    $layout = config('dashboard.layout', 'two-columns'); // Config option, default.
-    $layout = 'layouts.dashboard.'.trim($layout);
-    view()->share('layout', $layout);
+    if (!Shinobi::can('show.dashboard', false))
+      return view('layouts.unauthorized', ['message' => 'view the dashboard']);
 
-    Widget::group('dashboard')->addWidget('dashboard.Welcome');
+    Widget::group('dashboard.main')->addWidget('dashboard.Welcome');
+    Widget::group('dashboard.left')->addWidget('dashboard.Welcome');
+    Widget::group('dashboard.right')->addWidget('dashboard.Welcome');
 
     /**
      * Add additional widgets.
@@ -61,7 +63,8 @@ class DashboardController extends Controller {
      *
      * @param WidgetGroup
      */
-    Hook::run('widgets.dashboard', Widget::group('dashboard'));
+    foreach (['main', 'left', 'right'] as $position)
+      Hook::run('widgets.dashboard.'.$position, Widget::group('dashboard.'.$position));
 
     return view('dashboard');
   }

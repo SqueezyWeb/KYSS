@@ -7,7 +7,7 @@
  * @since 0.1.0
  */
 
-namespace App\Widgets\Dashboard;
+namespace KYSS\Widgets\Dashboard;
 
 use Arrilot\Widgets\AbstractWidget;
 
@@ -39,7 +39,7 @@ class Welcome extends AbstractWidget {
    * @return View
    */
   public function run() {
-    return view("widgets.welcome", [
+    return view('widgets.welcome', [
       'widget' => $this->config
     ]);
   }

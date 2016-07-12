@@ -151,14 +151,13 @@ return [
     /*
      * Application Service Providers...
      */
-    App\Providers\AppServiceProvider::class,
-    App\Providers\AuthServiceProvider::class,
-    App\Providers\EventServiceProvider::class,
-    App\Providers\RouteServiceProvider::class,
+    KYSS\Providers\KYSSServiceProvider::class,
+    KYSS\Providers\AuthServiceProvider::class,
+    KYSS\Providers\EventServiceProvider::class,
+    KYSS\Providers\RouteServiceProvider::class,
 
     Caffeinated\Shinobi\ShinobiServiceProvider::class, // Shinobi
     Collective\Html\HtmlServiceProvider::class, // For Watchtower Forms to function
-    Smarch\Watchtower\WatchtowerServiceProvider::class, // Watchtower
 
     Arrilot\Widgets\ServiceProvider::class, // Laravel Widgets
 
@@ -178,7 +177,7 @@ return [
 
   'aliases' => [
 
-    'App' => Illuminate\Support\Facades\App::class,
+    'KYSS' => Illuminate\Support\Facades\App::class,
     'Artisan' => Illuminate\Support\Facades\Artisan::class,
     'Auth' => Illuminate\Support\Facades\Auth::class,
     'Blade' => Illuminate\Support\Facades\Blade::class,
@@ -212,10 +211,9 @@ return [
     /*
     * Third Party Service Providers
     */
-    'Form'     => Collective\Html\FormFacade::class,  // required for Watchtower Forms
-    'HTML'     => Collective\Html\HtmlFacade::class,   // required for Watchtower Forms
+    'Form'     => Collective\Html\FormFacade::class,  // required for Forms
+    'HTML'     => Collective\Html\HtmlFacade::class,   // required for Forms
     'Shinobi'  => Caffeinated\Shinobi\Facades\Shinobi::class, // For RBAC functions
-    // 'Watchtower'=> Smarch\Watchtower\WatchtowerFacade::class, // not required, but available
     'Widget' => Arrilot\Widgets\Facade::class, // Laravel Widgets
     'AsyncWidget' => Arrilot\Widgets\AsyncFacade::class, // Async Laravel Widgets
     'Hook' => Freyja\Hook\Facades\Hook::class, // Hook

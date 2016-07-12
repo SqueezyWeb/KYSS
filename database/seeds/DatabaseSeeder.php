@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use KYSS\Database\Seeds\PermissionsTableSeeder;
+use KYSS\Database\Seeds\RolesTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,5 +14,6 @@ class DatabaseSeeder extends Seeder
   public function run()
   {
     $this->call(PermissionsTableSeeder::class);
+    $this->call(RolesTableSeeder::class);
   }
 }
