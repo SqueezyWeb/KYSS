@@ -1,2 +1,18 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+$screens: (
+  xs: $screen-xs-min,
+  sm: $screen-sm-min,
+  md: $screen-md-min,
+  lg: $screen-lg-min
+);
+
+@each $size in ('xs', 'sm', 'md', 'lg') {
+  @media (min-width: map-get($screens, $size)) {
+    @each $align in ('right', 'left', 'center', 'justify', 'nowrap') {
+      .text-#{$align}-#{$size} {
+        text-align: #{$align};
+      }
+    }
+  }
+}

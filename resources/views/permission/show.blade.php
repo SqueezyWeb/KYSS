@@ -7,7 +7,7 @@
 	<hr>
 
 	<div class="row">
-		<div class="col-sm-3 text-right">
+		<div class="col-sm-3 text-right-sm">
 			<p><b>Name:</b></p>
 		</div>
 		<div class="col-sm-6">
@@ -16,7 +16,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-sm-3 text-right">
+		<div class="col-sm-3 text-right-sm">
 			<p><b>Slug:</b></p>
 		</div>
 		<div class="col-sm-6">
@@ -25,7 +25,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-sm-3 text-right">
+		<div class="col-sm-3 text-right-sm">
 			<p><b>Description:</b></p>
 		</div>
 		<div class="col-sm-6">
