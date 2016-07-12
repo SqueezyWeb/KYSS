@@ -39,7 +39,7 @@
         </button>
 
         <!-- Branding Image -->
-        <a class="navbar-brand" href="{{ Auth::guest() ? url('/') : route('dashboard') }}">
+        <a class="navbar-brand" href="{{ Auth::guest() || !Shinobi::can('show.dashboard') ? url('/') : route('dashboard') }}">
           KYSS
         </a>
       </div>
@@ -50,10 +50,19 @@
           @if (!Auth::guest())
             @if (Shinobi::can('show.dashboard', false))
               <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+            @else
+              <li><a href="{{ url('/') }}">Home</a></li>
             @endif
-            <li><a href="{{ route('user.index') }}">Users</a></li>
-            <li><a href="{{ route('role.index') }}">Roles</a></li>
-            <li><a href="{{ route('permission.index') }}">Permissions</a></li>
+            @if (Shinobi::can('manage.users'))
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{ route('user.index') }}">Users</a></li>
+                  <li><a href="{{ route('role.index') }}">Roles</a></li>
+                  <li><a href="{{ route('permission.index') }}">Permissions</a></li>
+                </ul>
+              </li>
+            @endif
           @endif
         </ul>
 
