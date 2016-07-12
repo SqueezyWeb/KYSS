@@ -38,7 +38,7 @@
 			<p><b>Special Access:</b></p>
 		</div>
 		<div class="col-sm-6">
-			<p>{{ isset($role->special) ? ucwords(str_replace('-', ' ', $role->special)) : 'No special access' }}</p>
+			<p>{{ !empty($role->special) ? ucwords(str_replace('-', ' ', $role->special)) : 'No special access' }}</p>
 		</div>
 	</div>
 

@@ -10,8 +10,8 @@
 namespace KYSS\Http\Controllers;
 
 use Illuminate\Http\Request;
-use KYSS\Http\Requests\StoreRequest;
-use KYSS\Http\Requests\UpdateRequest;
+use KYSS\Http\Requests\RoleStoreRequest;
+use KYSS\Http\Requests\RoleUpdateRequest;
 
 use DB;
 use Shinobi;
@@ -107,7 +107,7 @@ class RoleController extends Controller {
    * @param StoreRequest $request
    * @return Response
    */
-  public function store(StoreRequest $request) {
+  public function store(RoleStoreRequest $request) {
     $level = 'danger';
     $message = ' You are not allowed to create roles.';
 
@@ -169,7 +169,7 @@ class RoleController extends Controller {
    * @param UpdateRequest $request
    * @return Response
    */
-  public function update(Role $role, UpdateRequest $request) {
+  public function update(Role $role, RoleUpdateRequest $request) {
     $level = 'danger';
     $message = ' You are not allowed to update roles.';
 

@@ -13,6 +13,8 @@ use DB;
 
 use Illuminate\Database\Seeder;
 
+use KYSS\Models\Permission;
+
 /**
  * Roles Table Seeder.
  *
@@ -62,6 +64,14 @@ class RolesTableSeeder extends Seeder {
     DB::table('role_user')->insert([
       'role_id' => 1,
       'user_id' => $user_id
+    ]);
+
+    // Associate roles with permissions.
+    $permission = Permission::where('slug', 'show.dashboard')->first();
+
+    DB::table('permission_role')->insert([
+      'role_id' => 2,
+      'permission_id' => $permission->id
     ]);
   }
 }

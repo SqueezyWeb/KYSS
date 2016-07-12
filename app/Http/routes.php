@@ -26,7 +26,9 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 */
 Route::get('permission/{permission}/roles/edit', 'PermissionController@editRoles')->name('permission.roles.edit');
 Route::post('permission/{permission}/roles', 'PermissionController@updateRoles')->name('permission.roles.update');
-Route::resource('permission', 'PermissionController');
+Route::resource('permission', 'PermissionController', [
+  'only' => ['index', 'show']
+]);
 
 /*
 |-------------------------------------------------------------------------

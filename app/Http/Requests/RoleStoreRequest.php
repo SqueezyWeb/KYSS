@@ -1,6 +1,6 @@
 <?php
 /**
- * Role and Permission Update Request file.
+ * Role and Permission Store Request file.
  *
  * @package KYSS\Http\Requests
  * @copyright 2016 SqueezyWeb
@@ -9,14 +9,16 @@
 
 namespace KYSS\Http\Requests;
 
+use Shinobi;
+
 /**
- * Role and Permission Update Request.
+ * Role and Permission Store Request.
  *
  * @author Mattia Migliorini <mattia@squeezyweb.com>
  * @since 0.1.0
  * @version 1.0.0
  */
-class UpdateRequest extends Request {
+class RoleStoreRequest extends Request {
   /**
    * Determine if user is authorized to make this request.
    *
@@ -26,7 +28,7 @@ class UpdateRequest extends Request {
    * @return bool
    */
   public function authorize() {
-    return true;
+    return Shinobi::can('manage.users', false);
   }
 
   /**
@@ -38,12 +40,9 @@ class UpdateRequest extends Request {
    * @return array
    */
   public function rules() {
-    $model = strpos($this->route()->getName(), 'permission') !== false ? 'permission' : 'role';
-    $table = str_plural($model);
-
     return [
-      'slug' => 'required|unique:'.$table.',slug,'.$this->{$model}->id.'|max:255|min:4',
-      'name' => 'required|unique:'.$table.',name,'.$this->{$model}->id.'|max:255|min:4'
+      'name' => 'required|unique:roles|max:255|min:4',
+      'slug' => 'required|unique:roles|max:255|min:4'
     ];
   }
 }

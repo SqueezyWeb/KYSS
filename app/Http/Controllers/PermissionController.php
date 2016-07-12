@@ -82,42 +82,6 @@ class PermissionController extends Controller {
   }
 
   /**
-   * Display form for creating new Permission.
-   *
-   * @since 0.1.0
-   * @access public
-   *
-   * @return Response
-   */
-  public function create() {
-    if (!Shinobi::can(config('acl.permission.create', false)))
-      return view('layouts.unauthorized', ['message' => 'create new permissions']);
-
-    return view('permission.create');
-  }
-
-  /**
-   * Store newly created resource in storage.
-   *
-   * @since 0.1.0
-   * @access public
-   *
-   * @return Response
-   */
-  public function store(StoreRequest $request) {
-    $level = 'danger';
-    $message = ' You are not allowed to create permissions.';
-
-    if (Shinobi::can(config('acl.permission.create', false))) {
-      Permission::create($request->all());
-      $level = 'success';
-      $message = '<i class="fa fa-check-square-o fa-1x"></i> Success! Permission created.';
-    }
-
-    return redirect()->route('permission.index')->with(['flash' => compact('message', 'level')]);
-  }
-
-  /**
    * Display specified Permission.
    *
    * @since 0.1.0
@@ -133,71 +97,6 @@ class PermissionController extends Controller {
     $route = $this->route;
 
     return view('permission.show', compact('permission'));
-  }
-
-  /**
-   * Show form for editing specified Permission.
-   *
-   * @since 0.1.0
-   * @access public
-   *
-   * @param Permission $permission Permission object.
-   * @return Response
-   */
-  public function edit(Permission $permission) {
-    if (!Shinobi::canAtLeast([
-      config('acl.permission.edit', false),
-      config('acl.permission.show', false)
-    ]))
-      return view('layouts.unauthorized', ['message' => 'edit permissions']);
-
-    $route = $this->route;
-
-    return view('permission.edit', compact('permission', 'route'));
-  }
-
-  /**
-   * Update specified Permission in storage.
-   *
-   * @since 0.1.0
-   * @access public
-   *
-   * @param Permission $permission Permission object.
-   * @return Response
-   */
-  public function update(Permission $permission, UpdateRequest $request) {
-    $level = 'danger';
-    $message = ' You are not allowed to update permissions.';
-
-    if (Shinobi::can(config('acl.permission.edit', false))) {
-      $permission->update($request->all());
-      $level = 'success';
-      $message = '<i class="fa fa-check-square-o fa-1x"></i> Success! Permission edited.';
-    }
-
-    return redirect()->route('permission.show', $permission->id)->with(['flash' => compact('message', 'level')]);
-  }
-
-  /**
-   * Remove specified Permission from storage.
-   *
-   * @since 0.1.0
-   * @access public
-   *
-   * @param int $id Permission ID.
-   * @return Response
-   */
-  public function destroy($id) {
-    $level = 'danger';
-    $message = ' You are not allowed to destroy permissions.';
-
-    if (Shinobi::can(config('acl.permission.destroy', false))) {
-      Permission::destroy($id);
-      $level = 'warning';
-      $message = '<i class="fa fa-check-square-o fa-1x"></i> Success! Permission deleted.';
-    }
-
-    return redirect()->route('permission.index')->with(['flash' => compact('message', 'level')]);
   }
 
   /**
