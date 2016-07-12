@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace KYSS\Events;
 
 abstract class Event
 {

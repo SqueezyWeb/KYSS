@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Providers;
+namespace KYSS\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class KYSSServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
