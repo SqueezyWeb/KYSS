@@ -13,6 +13,7 @@ use Hook;
 use Widget;
 use KYSS\Http\Requests;
 use Illuminate\Http\Request;
+use Shinobi;
 
 /**
  * Dashboard Controller.
@@ -43,6 +44,9 @@ class DashboardController extends Controller {
    * @return \Illuminate\Http\Response
    */
   public function index() {
+    if (!Shinobi::can('show.dashboard', false))
+      return view('layouts.unauthorized', ['message' => 'view the dashboard']);
+
     Widget::group('dashboard.main')->addWidget('dashboard.Welcome');
     Widget::group('dashboard.left')->addWidget('dashboard.Welcome');
     Widget::group('dashboard.right')->addWidget('dashboard.Welcome');

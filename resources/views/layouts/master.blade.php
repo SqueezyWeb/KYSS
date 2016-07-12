@@ -39,7 +39,7 @@
         </button>
 
         <!-- Branding Image -->
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" href="{{ Auth::guest() ? url('/') : route('dashboard') }}">
           KYSS
         </a>
       </div>
@@ -48,7 +48,9 @@
         <!-- Left Side Of Navbar -->
         <ul class="nav navbar-nav">
           @if (!Auth::guest())
-            <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+            @if (Shinobi::can('show.dashboard', false))
+              <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+            @endif
             <li><a href="{{ route('user.index') }}">Users</a></li>
             <li><a href="{{ route('role.index') }}">Roles</a></li>
             <li><a href="{{ route('permission.index') }}">Permissions</a></li>
